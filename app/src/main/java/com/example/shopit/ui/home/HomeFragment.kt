@@ -19,12 +19,7 @@ class HomeFragment : Fragment() {
     var homeListRecyclerView: RecyclerView? = null
     var homeListAdapter: HomeListAdapter = HomeListAdapter()
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Home"
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         homeListRecyclerView = rootView?.findViewById(R.id.home_list_recycler_view)
@@ -36,6 +31,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Home"
 
         setShopList{
             if (it != null) {
@@ -101,9 +97,6 @@ class HomeFragment : Fragment() {
         }else{
             completion(null)
         }
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     companion object{
