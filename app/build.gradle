@@ -24,6 +24,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -31,7 +32,8 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -57,9 +59,8 @@ dependencies {
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
 
     //AWS
-    implementation 'com.amplifyframework:core:1.0.0'
-    implementation 'com.amplifyframework:aws-datastore:1.0.0'
-    implementation 'com.amplifyframework:aws-api:1.0.0'
-    implementation 'com.amplifyframework:aws-predictions:1.0.0'
-    implementation 'com.amplifyframework:aws-auth-cognito:1.0.0'
+    // Amplify core dependency
+    implementation 'com.amplifyframework:core:1.24.0'
+    // Support for Java 8 features
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.amplifyframework.AmplifyException
+import com.amplifyframework.core.Amplify
 import com.example.shopit.databinding.ActivityMainBinding
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
@@ -45,6 +47,13 @@ class MainActivity : AppCompatActivity() {
             Picasso.setSingletonInstance(picasso)
 
             isRunOnce = true
+        }
+
+        try {
+            Amplify.configure(applicationContext)
+            Log.i(TAG, "Initialized Amplify")
+        } catch (error: AmplifyException) {
+            Log.e(TAG, "Could not initialize Amplify", error)
         }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
