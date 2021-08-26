@@ -5,10 +5,15 @@
       <map>
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.4197916666666667" />
         <entry key="app/src/main/res/drawable/ic_phone.xml" value="0.3921875" />
+        <entry key="app/src/main/res/layout/acitvity_login.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/create_account.xml" value="0.3375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3917572463768116" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3917572463768116" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3917572463768116" />
+        <entry key="app/src/main/res/layout/reset_password.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/reset_password_new_password.xml" value="0.3375" />
         <entry key="app/src/main/res/layout/shop_list_item.xml" value="0.30479199041459376" />
         <entry key="app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4036458333333333" />
