@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopit.MainActivity
 import com.example.shopit.data.store.ShopAddressDataClass
 import com.example.shopit.data.store.ShopDataClass
 import com.example.shopit.data.store.ShopHoursDataClass
@@ -25,6 +27,9 @@ class HomeFragment : Fragment() {
         homeListRecyclerView!!.setHasFixedSize(true)
         homeListAdapter.data = mutableListOf()
         homeListRecyclerView!!.adapter = homeListAdapter
+
+        (activity as MainActivity).cartButton?.findItem(R.id.action_bar_cart_item)?.isVisible = false
+
         return rootView
     }
 
@@ -41,6 +46,10 @@ class HomeFragment : Fragment() {
             }else{
                 Log.d(TAG, "Loading shop list was failure")
             }
+        }
+
+        homeListAdapter.didClickShopAtPosition = {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_storeFragment)
         }
     }
 

@@ -9,13 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.Cartit.ui.cart.CartListAdapter
-import com.example.myapplication.dataclasses.ShopAddressDataClass
-import com.example.myapplication.dataclasses.ShopDataClass
-import com.example.myapplication.dataclasses.ShopHoursDataClass
+import com.example.shopit.MainActivity
 import com.example.shopit.R
-import java.time.DayOfWeek
+import com.example.shopit.data.cart.CartProductDataClass
 
-class CartFragment:Fragment(){
+class CartFragment : Fragment(){
 
     lateinit var cartListRecyclerView: RecyclerView
     var cartListAdapter: CartListAdapter = CartListAdapter()
@@ -31,64 +29,32 @@ class CartFragment:Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Cart"
 
-        setShopList{
+        (activity as MainActivity).cartButton?.findItem(R.id.action_bar_cart_item)?.isVisible = false
+
+        setCartList {
             if (it != null) {
                 Log.d(TAG, "Loading shop list was succuessful")
                 cartListAdapter.data = it
                 cartListAdapter.update(it)
                 cartListRecyclerView.scheduleLayoutAnimation()
-            }else{
+            } else{
                 Log.d(TAG, "Loading shop list was failure")
             }
         }
     }
 
-    private fun setShopList(completion: (isSuccess: MutableList<ShopDataClass>?) -> Unit){
-        var listOfShops = mutableListOf<ShopDataClass>()
+    private fun setCartList(completion: (isSuccess: MutableList<CartProductDataClass>?) -> Unit){
+        var listOfShops = mutableListOf<CartProductDataClass>()
 
-        for (i in 1..16){
+        for (i in 1..4){
             listOfShops.add(
-                ShopDataClass(
-                    "https://www.dimensionshopfitters.co.nz/assets/Uploads/portfolio/_resampled/SetWidth1140-1-Shop-Front.jpg",
-                    "Shop $i",
-                    "091110001",
-                    null,
-                    ShopAddressDataClass(
-                        "123 Address Cres",
-                        null,
-                        "Suburbia",
-                        "Cittttty",
-                        "New Zealand"
-                    ),
-                    mutableListOf(
-                        ShopHoursDataClass(
-                            DayOfWeek.MONDAY,
-                            "9AM",
-                            "5PM"
-                        ),
-                        ShopHoursDataClass(
-                            DayOfWeek.TUESDAY,
-                            "9AM",
-                            "5PM"
-                        ),
-                        ShopHoursDataClass(
-                            DayOfWeek.WEDNESDAY,
-                            "9AM",
-                            "5PM"
-                        ),
-                        ShopHoursDataClass(
-                            DayOfWeek.THURSDAY,
-                            "9AM",
-                            "5PM"
-                        ),
-                        ShopHoursDataClass(
-                            DayOfWeek.FRIDAY,
-                            "11AM",
-                            "10PM"
-                        )
-                    )
+                CartProductDataClass(
+                    "",
+                    "test product name",
+                    "$${i}.90",
+                    1,
+                    "01001010111101"
                 )
             )
         }

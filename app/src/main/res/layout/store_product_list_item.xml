@@ -67,13 +67,7 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
-            <Button
-                android:id="@+id/cart_add_button"
-                android:layout_width="90dp"
-                android:layout_height="40dp"
-                android:text="Cart +"
-                android:visibility="gone"
-                android:layout_gravity="center_vertical"/>
+
         </LinearLayout>
 
         <View style="@style/Divider.Horizontal" />

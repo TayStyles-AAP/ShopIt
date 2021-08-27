@@ -13,7 +13,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
     var data = mutableListOf<ShopDataClass>()
     var ctx: Context? = null
 
-    var didClickShopAtPosition: ((Int) -> Int)? = null
+    var didClickShopAtPosition: ((Int) -> Unit)? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,8 +31,6 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
 
         holder.itemView.setOnClickListener {
             Log.d(TAG, "Clicked shop[$position]")
-            Toast.makeText(ctx, "Clicked ${holder.shop!!.shopName}", Toast.LENGTH_SHORT).show()
-            clickedShopPosition = position
             this.didClickShopAtPosition?.let { f -> f(position) }
         }
     }
@@ -47,7 +45,6 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
     }
 
     companion object {
-        var clickedShopPosition: Int = 0
         private const val TAG = "ShopIt-HomeListAdapter"
     }
 }

@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.shopit"
-        minSdk 27
+        minSdk 28
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -63,4 +63,7 @@ dependencies {
     implementation 'com.amplifyframework:core:1.24.0'
     // Support for Java 8 features
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    //cardview library for rounded corners
+    implementation 'com.github.captain-miao:optroundcardview:1.0.0'
 }

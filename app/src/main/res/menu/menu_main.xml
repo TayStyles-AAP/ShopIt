@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="AlwaysShowAction">
 
-    <item android:id="@+id/siteSettingsActionBar"
+    <item android:id="@+id/action_bar_cart_item"
         android:icon="@drawable/ic_basket"
         android:visible="true"
         app:showAsAction="always"

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.productit.ui.home.CartListItemViewHolder
 import com.example.shopit.R
+import com.example.shopit.data.cart.CartProductDataClass
 
 class CartListAdapter : RecyclerView.Adapter<CartListItemViewHolder>() {
     var data = mutableListOf<CartProductDataClass>()
@@ -21,17 +22,17 @@ class CartListAdapter : RecyclerView.Adapter<CartListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartListItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        var view = layoutInflater.inflate(R.layout.Cart_list_item, parent, false)
-        ctx = parent.getContext()
+        var view = layoutInflater.inflate(R.layout.cart_list_item, parent, false)
+        ctx = parent.context
         return CartListItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CartListItemViewHolder, position: Int) {
-        holder.CartProductDataClass = this.data[position]
+        holder.product = this.data[position]
 
         holder.itemView.setOnClickListener {
             Log.d(TAG, "Clicked Cart[$position]")
-            Toast.makeText(ctx, "Clicked ${holder.CartProductDataClass!!.CartName}", Toast.LENGTH_SHORT).show()
+
             clickedCartPosition = position
             this.didClickCartAtPosition?.let { f -> f(position) }
         }

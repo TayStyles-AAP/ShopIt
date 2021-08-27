@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.dataclasses.productDataClass
 import com.example.shopit.R
+import com.example.shopit.data.cart.CartProductDataClass
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
@@ -29,10 +29,10 @@ class CartListItemViewHolder(cartItemView: View) : RecyclerView.ViewHolder(cartI
             //this.productQuantity.text = this.product!!.cartProductQuantity // to be defined
 
 
-            Log.d("SiteListItemViewHolder", "product image URL is:(${this.product!!.productImage})")
+            Log.d("SiteListItemViewHolder", "product image URL is:(${this.product!!.cartProductImage})")
 
-            if (this.product!!.productImage.isNullOrBlank()) {
-                productImage.setImageResource(R.drawable.ic_home_black_24dp)
+            if (this.product!!.cartProductImage.isBlank()) {
+                productImage.setImageResource(R.drawable.ic_product)
                 productImage.setColorFilter(
                     ContextCompat.getColor(
                         productImage.context,
@@ -41,7 +41,7 @@ class CartListItemViewHolder(cartItemView: View) : RecyclerView.ViewHolder(cartI
                 )
                 productImage.strokeWidth = 0.0F
             } else {
-                picasso.load(this.product!!.productImage)
+                picasso.load(this.product!!.cartProductImage)
                     .transform(CropCircleTransformation())
                     .into(productImage)
             }
