@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.dataclasses.ShopDataClass
+import com.example.shopit.data.store.ShopDataClass
 import com.example.shopit.R
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso

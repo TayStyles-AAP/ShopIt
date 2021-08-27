@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.dataclasses.ShopAddressDataClass
-import com.example.myapplication.dataclasses.ShopDataClass
-import com.example.myapplication.dataclasses.ShopHoursDataClass
+import com.example.shopit.data.store.ShopAddressDataClass
+import com.example.shopit.data.store.ShopDataClass
+import com.example.shopit.data.store.ShopHoursDataClass
 import com.example.shopit.R
 import java.time.DayOfWeek
 
@@ -20,7 +20,6 @@ class HomeFragment : Fragment() {
     var homeListAdapter: HomeListAdapter = HomeListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         homeListRecyclerView = rootView?.findViewById(R.id.home_list_recycler_view)
         homeListRecyclerView!!.setHasFixedSize(true)

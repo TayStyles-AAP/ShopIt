@@ -1,4 +1,4 @@
-package com.example.myapplication.dataclasses
+package com.example.shopit.data.store
 
 import java.time.DayOfWeek
 

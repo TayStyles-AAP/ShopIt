@@ -3,14 +3,11 @@ package com.example.shopit.ui.home
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.dataclasses.ShopDataClass
+import com.example.shopit.data.store.ShopDataClass
 import com.example.shopit.R
-import com.google.android.material.snackbar.Snackbar
 
 class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
     var data = mutableListOf<ShopDataClass>()
