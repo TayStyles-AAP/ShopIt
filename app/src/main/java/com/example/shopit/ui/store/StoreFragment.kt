@@ -12,14 +12,16 @@ import com.example.shopit.MainActivity
 import com.example.shopit.R
 import com.example.shopit.data.store.storeProduct.StoreProductDataClass
 import androidx.recyclerview.widget.LinearLayoutManager
-
-
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class StoreFragment : Fragment(){
 
     lateinit var storeListRecyclerView: RecyclerView
     var storeListAdapter: StoreListAdapter = StoreListAdapter()
+
+    val db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_store, container, false)

@@ -14,12 +14,17 @@ import com.example.shopit.data.store.ShopAddressDataClass
 import com.example.shopit.data.store.ShopDataClass
 import com.example.shopit.data.store.ShopHoursDataClass
 import com.example.shopit.R
+import com.example.shopit.data.dbClasses.StoreDetails
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.time.DayOfWeek
 
 class HomeFragment : Fragment() {
 
     var homeListRecyclerView: RecyclerView? = null
     var homeListAdapter: HomeListAdapter = HomeListAdapter()
+
+    val db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -56,7 +61,39 @@ class HomeFragment : Fragment() {
     private fun setShopList(completion: (isSuccess: MutableList<ShopDataClass>?) -> Unit){
         var listOfShops = mutableListOf<ShopDataClass>()
 
-        for (i in 1..9){
+        val storeDetails = hashMapOf(
+            "address" to hashMapOf(
+                "city" to "Test City",
+                "country" to "Test Country",
+                "line_one" to "Test Line One",
+                "line_two" to "Test Line Two",
+                "suburb" to "Test Suburb"
+            ),
+            "email" to "test email",
+            "hours" to hashMapOf(
+                "friday" to "9-5",
+                "monday" to "9-5",
+                "saturday" to "9-5",
+                "sunday" to "9-5",
+                "thursday" to "9-5",
+                "tuesday" to "9-5",
+                "wednesday" to "9-5",
+            ),
+            "image_url" to "www.testurl.com",
+            "products" to arrayListOf("test", "test", "test"),
+            "sid" to 1
+        )
+
+        db.collection("Store").document("store_details")
+            .set(storeDetails)
+            .addOnSuccessListener {
+                Log.d(TAG, "Writing to database success")
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "Failed to write to database", it)
+            }
+
+        for (i in 1..3){
             listOfShops.add(
                 ShopDataClass(
                     "https://www.dimensionshopfitters.co.nz/assets/Uploads/portfolio/_resampled/SetWidth1140-1-Shop-Front.jpg",

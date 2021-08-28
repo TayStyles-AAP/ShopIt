@@ -117,6 +117,8 @@ class LoginActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if(currentUser != null){
             Log.d(TAG, "User is already logged in (${currentUser.displayName})")
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
     companion object{
