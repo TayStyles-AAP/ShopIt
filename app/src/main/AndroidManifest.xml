@@ -30,7 +30,7 @@
             android:theme="@style/Theme.ShopIt.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.SignupActivity"
+            android:name=".ui.signup.SignupActivity"
             android:theme="@style/Theme.ShopIt.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity

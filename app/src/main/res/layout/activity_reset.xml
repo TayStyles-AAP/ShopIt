@@ -43,7 +43,6 @@
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-
                 android:minHeight="48dp"
                 android:textAlignment="center" />
 
@@ -54,5 +53,4 @@
                 android:text="Send Reset Password Link" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

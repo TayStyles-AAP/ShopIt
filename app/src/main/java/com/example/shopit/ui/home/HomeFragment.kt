@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
     private fun setShopList(completion: (isSuccess: MutableList<ShopDataClass>?) -> Unit){
         var listOfShops = mutableListOf<ShopDataClass>()
 
-        for (i in 1..16){
+        for (i in 1..9){
             listOfShops.add(
                 ShopDataClass(
                     "https://www.dimensionshopfitters.co.nz/assets/Uploads/portfolio/_resampled/SetWidth1140-1-Shop-Front.jpg",

@@ -3,7 +3,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.0'
@@ -11,11 +10,12 @@ buildscript {
 
         //AWS
         classpath 'com.amplifyframework:amplify-tools-gradle-plugin:1.0.0'
+
+        //google
+        classpath 'com.google.gms:google-services:4.3.2'
+
     }
 }
-
-//AWS
-apply plugin: 'com.amplifyframework.amplifytools'
 
 task clean(type: Delete) {
     delete rootProject.buildDir

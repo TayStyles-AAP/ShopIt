@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shopit.R
 import com.example.shopit.ui.login.LoginActivity
+import com.google.firebase.FirebaseApp
 
 class SplashScreen : AppCompatActivity() {
 
