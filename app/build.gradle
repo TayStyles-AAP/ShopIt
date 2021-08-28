@@ -69,6 +69,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-core:19.0.1'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    //code scanner
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
