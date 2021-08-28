@@ -35,3 +35,4 @@ amplifytools.xcconfig
 .secret-*
 #amplify-do-not-edit-end
 .idea/misc.xml
+.idea/misc.xml
