@@ -19,7 +19,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.shopit.ui.search.SearchFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_barcodeScanner"
+            app:destination="@id/barcodeScanner" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -39,5 +43,13 @@
         <action
             android:id="@+id/action_storeFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_storeFragment_to_barcodeScanner"
+            app:destination="@id/barcodeScanner" />
     </fragment>
+    <fragment
+        android:id="@+id/barcodeScanner"
+        android:name="com.example.shopit.ui.barcodescanner.BarcodeScanner"
+        android:label="code_scanner"
+        tools:layout="@layout/code_scanner" />
 </navigation>
