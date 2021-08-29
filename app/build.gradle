@@ -72,6 +72,9 @@ dependencies {
 
     //code scanner
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    //google maps
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 }
 
 apply plugin: 'kotlin-android'
