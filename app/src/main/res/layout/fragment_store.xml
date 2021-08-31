@@ -61,7 +61,11 @@
                         android:textSize="12dp" />
                 </LinearLayout>
                 <ImageView
+<<<<<<< Updated upstream
                     android:id="@+id/store_favourites"
+=======
+                    android:id="@+id/store_favourite"
+>>>>>>> Stashed changes
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
@@ -77,11 +81,14 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+<<<<<<< Updated upstream
                     android:layout_width="300dp"
+=======
+                    android:layout_width="0dp"
+>>>>>>> Stashed changes
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="0.9"
-                    android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <TextView
@@ -119,10 +126,13 @@
                 </LinearLayout>
 
                 <ImageView
+<<<<<<< Updated upstream
                     android:id="@+id/store_maps_pin"
+=======
+                    android:id="@+id/store_location_pin"
+>>>>>>> Stashed changes
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="5dp"
                     android:src="@drawable/maps_pin" />

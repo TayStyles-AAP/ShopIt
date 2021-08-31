@@ -3,11 +3,16 @@ package com.example.shopit.ui.maps
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+<<<<<<< Updated upstream
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+=======
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+>>>>>>> Stashed changes
 import com.example.shopit.R
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng

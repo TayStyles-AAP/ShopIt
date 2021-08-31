@@ -43,12 +43,15 @@
         <action
             android:id="@+id/action_storeFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+<<<<<<< Updated upstream
         <action
             android:id="@+id/action_storeFragment_to_barcodeScanner"
             app:destination="@id/barcodeScanner" />
         <action
             android:id="@+id/action_storeFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+=======
+>>>>>>> Stashed changes
     </fragment>
     <fragment
         android:id="@+id/barcodeScanner"
