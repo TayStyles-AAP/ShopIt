@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopit.MainActivity
@@ -15,6 +18,7 @@ import com.example.shopit.data.store.storeProduct.StoreProductDataClass
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 
 
 class StoreFragment : Fragment(){
@@ -49,8 +53,18 @@ class StoreFragment : Fragment(){
             }
         }
 
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getString("bundleKey")
+            // Do something with the result
+            
+        }
+
+
         mapButton = view.findViewById(R.id.store_maps_pin)
         mapButton.setOnClickListener{
+            var result = "10 Manu Place Pinehill Auckland"
+            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
             Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_mapFragment)
         }
 
