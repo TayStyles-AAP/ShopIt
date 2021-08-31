@@ -61,51 +61,86 @@
                         android:textSize="12dp" />
                 </LinearLayout>
                 <ImageView
+<<<<<<< Updated upstream
+                    android:id="@+id/store_favourites"
+=======
+                    android:id="@+id/store_favourite"
+>>>>>>> Stashed changes
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="15dp"
                     android:src="@drawable/ic_star"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/store_address_line_two"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+<<<<<<< Updated upstream
+                    android:layout_width="300dp"
+=======
+                    android:layout_width="0dp"
+>>>>>>> Stashed changes
                     android:layout_height="wrap_content"
-                    android:text="Address Line 1"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.9"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/store_address_line_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address Line 2"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:id="@+id/store_address_line_two"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address Line 1"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
 
-                <TextView
-                    android:id="@+id/store_address_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address City"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:id="@+id/store_address_line_one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address Line 2"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
 
-                <TextView
-                    android:id="@+id/store_address_post_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address Post Code"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    <TextView
+                        android:id="@+id/store_address_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address City"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/store_address_post_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address Post Code"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <ImageView
+<<<<<<< Updated upstream
+                    android:id="@+id/store_maps_pin"
+=======
+                    android:id="@+id/store_location_pin"
+>>>>>>> Stashed changes
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/maps_pin" />
+
             </LinearLayout>
+
+
+
         </LinearLayout>
 
         <com.github.captain_miao.optroundcardview.OptRoundCardView

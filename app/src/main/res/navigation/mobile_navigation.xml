@@ -18,18 +18,18 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.shopit.ui.search.SearchFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_search" >
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_navigation_dashboard_to_barcodeScanner"
             app:destination="@id/barcodeScanner" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.shopit.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="com.example.shopit.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.shopit.ui.cart.CartFragment"
@@ -43,13 +43,24 @@
         <action
             android:id="@+id/action_storeFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+<<<<<<< Updated upstream
         <action
             android:id="@+id/action_storeFragment_to_barcodeScanner"
             app:destination="@id/barcodeScanner" />
+        <action
+            android:id="@+id/action_storeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+=======
+>>>>>>> Stashed changes
     </fragment>
     <fragment
         android:id="@+id/barcodeScanner"
         android:name="com.example.shopit.ui.barcodescanner.BarcodeScanner"
-        android:label="code_scanner"
+        android:label="Barcode Scanner"
         tools:layout="@layout/code_scanner" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.shopit.ui.maps.MapFragment"
+        android:label="Store Location"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

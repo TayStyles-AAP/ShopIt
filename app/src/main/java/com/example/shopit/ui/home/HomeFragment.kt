@@ -54,6 +54,9 @@ class HomeFragment : Fragment() {
         }
 
         homeListAdapter.didClickShopAtPosition = {
+            val result = "result"
+            // Use the Kotlin extension in the fragment-ktx artifact
+
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_storeFragment)
         }
     }
