@@ -16,6 +16,7 @@ class SearchFragment : Fragment() {
     lateinit var scanButton: Button
     lateinit var searchView: SearchView
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }

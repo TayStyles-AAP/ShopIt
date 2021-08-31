@@ -43,13 +43,24 @@
         <action
             android:id="@+id/action_storeFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+<<<<<<< Updated upstream
         <action
             android:id="@+id/action_storeFragment_to_barcodeScanner"
             app:destination="@id/barcodeScanner" />
+        <action
+            android:id="@+id/action_storeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+=======
+>>>>>>> Stashed changes
     </fragment>
     <fragment
         android:id="@+id/barcodeScanner"
         android:name="com.example.shopit.ui.barcodescanner.BarcodeScanner"
         android:label="Barcode Scanner"
         tools:layout="@layout/code_scanner" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.shopit.ui.maps.MapFragment"
+        android:label="Store Location"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

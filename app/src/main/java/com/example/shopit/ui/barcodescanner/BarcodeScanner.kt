@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -54,7 +55,7 @@ class BarcodeScanner : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Barcode Scanner"
         codeScanner = CodeScanner(requireContext(), scannerView)
         barcodeOutput = view.findViewById(R.id.code_scanner_barcode_output)
 
