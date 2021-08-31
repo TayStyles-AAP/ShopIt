@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#f5f5f5"
     android:layout_height="match_parent"
+    android:background="#f5f5f5"
     tools:context=".ui.store.StoreFragment">
 
     <LinearLayout
@@ -36,7 +36,7 @@
                     app:strokeWidth="3dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
                     android:layout_weight="0.9"
@@ -60,17 +60,14 @@
                         android:textColor="@color/black"
                         android:textSize="12dp" />
                 </LinearLayout>
+
                 <ImageView
-<<<<<<< Updated upstream
                     android:id="@+id/store_favourites"
-=======
-                    android:id="@+id/store_favourite"
->>>>>>> Stashed changes
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_star"/>
+                    android:src="@drawable/ic_star" />
 
             </LinearLayout>
 
@@ -81,11 +78,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-<<<<<<< Updated upstream
-                    android:layout_width="300dp"
-=======
                     android:layout_width="0dp"
->>>>>>> Stashed changes
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="0.9"
@@ -126,11 +119,7 @@
                 </LinearLayout>
 
                 <ImageView
-<<<<<<< Updated upstream
                     android:id="@+id/store_maps_pin"
-=======
-                    android:id="@+id/store_location_pin"
->>>>>>> Stashed changes
                     android:layout_width="50dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
@@ -138,9 +127,6 @@
                     android:src="@drawable/maps_pin" />
 
             </LinearLayout>
-
-
-
         </LinearLayout>
 
         <com.github.captain_miao.optroundcardview.OptRoundCardView
@@ -148,10 +134,10 @@
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             app:optRoundCardCornerRadius="20dp"
-            app:optRoundCardLeftBottomCorner="false"
-            app:optRoundCardRightBottomCorner="false"
             app:optRoundCardElevation="20dp"
-            app:optRoundCardMaxElevation="100dp">
+            app:optRoundCardLeftBottomCorner="false"
+            app:optRoundCardMaxElevation="100dp"
+            app:optRoundCardRightBottomCorner="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,7 +157,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/store_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
         </com.github.captain_miao.optroundcardview.OptRoundCardView>
