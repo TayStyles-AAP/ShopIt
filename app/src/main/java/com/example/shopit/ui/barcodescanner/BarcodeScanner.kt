@@ -85,7 +85,6 @@ class BarcodeScanner : Fragment() {
 
         codeScanner.camera = CodeScanner.CAMERA_BACK
         codeScanner.formats = listOf(BarcodeFormat.EAN_8, BarcodeFormat.EAN_13)
-
         codeScanner.autoFocusMode = AutoFocusMode.SAFE
         codeScanner.scanMode = ScanMode.CONTINUOUS
         codeScanner.isAutoFocusEnabled = true
