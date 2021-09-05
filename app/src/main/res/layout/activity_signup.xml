@@ -78,6 +78,12 @@
                 android:inputType="textPassword"
                 android:minHeight="48dp" />
 
+            <CheckBox
+                android:id="@+id/Activity_signup_business_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Are you a business or do you want to sell with us?" />
+
             <Button
                 android:id="@+id/signup_signup_button"
                 android:layout_width="match_parent"

@@ -9,14 +9,16 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_reset.xml" value="0.325" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.309375" />
+        <entry key="app/src/main/res/layout/business_user_signup.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/business_user_store_hours.xml" value="0.321875" />
         <entry key="app/src/main/res/layout/create_account.xml" value="0.3375" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3917572463768116" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3917572463768116" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.254985754985755" />
-        <entry key="app/src/main/res/layout/fragment_store.xml" value="0.40110650069156295" />
-        <entry key="app/src/main/res/layout/reset_password.xml" value="0.37552083333333336" />
-        <entry key="app/src/main/res/layout/reset_password_new_password.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3917572463768116" />
+        <entry key="app/src/main/res/layout/reset_password.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/reset_password_new_password.xml" value="0.3375" />
         <entry key="app/src/main/res/layout/shop_list_item.xml" value="0.30479199041459376" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.4036458333333333" />
       </map>

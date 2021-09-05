@@ -12,12 +12,14 @@ import com.example.shopit.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignupActivity : AppCompatActivity() {
 
     //firebase
     private lateinit var auth: FirebaseAuth
+
 
     //UI
     private lateinit var signupButton: Button
@@ -55,6 +57,12 @@ class SignupActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val user = auth.currentUser
+                        val db = FirebaseFirestore.getInstance()
+                        val firstname: String = firstNameEditText.getText().toString()
+                        val lastname: String = lastNameEditText.getText().toString()
+                        val email: String = emailNameEditText.getText().toString()
+                        val password: String = passwordFirstEditText.getText().toString()
+
 
                         if (user != null) {
                             val profileUpdates = userProfileChangeRequest {
@@ -64,6 +72,22 @@ class SignupActivity : AppCompatActivity() {
                             user.updateProfile(profileUpdates).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.d(TAG, "User profile updated.")
+
+                                    //firestore write to database
+                                    val user_dets = hashMapOf(
+                                        "email" to email,
+                                        "first_name" to firstname,
+                                        "last_name" to lastname,
+                                        "email" to email,
+                                        "password" to password
+
+                                        //TODO: ID - Store ID and User ID
+                                    )
+
+
+                                    db.collection("Users").document(email).set(user_dets)
+                                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+                                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                                 }
                             }
 
@@ -142,4 +166,6 @@ class SignupActivity : AppCompatActivity() {
     companion object{
         private const val TAG = "ShopIt-SignupActivity"
     }
+
+
 }
