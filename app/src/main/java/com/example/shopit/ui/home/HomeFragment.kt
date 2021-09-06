@@ -40,11 +40,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "===Home Fragment onViewCreated")
+
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Home"
 
         setShopList{
             if (it != null) {
-                Log.d(TAG, "Loading shop list was succuessful")
+                Log.d(TAG, "Loading shop list was successful")
                 homeListAdapter.data = it
                 homeListAdapter.update(it)
                 homeListRecyclerView!!.scheduleLayoutAnimation()
@@ -142,6 +144,16 @@ class HomeFragment : Fragment() {
         }else{
             completion(null)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "===Home Fragment onDestroy")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "===Home Fragment onPause")
     }
 
     companion object{

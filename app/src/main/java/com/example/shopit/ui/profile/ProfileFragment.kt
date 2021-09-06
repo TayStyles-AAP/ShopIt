@@ -1,6 +1,7 @@
 package com.example.shopit.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(TAG, "===Profile Fragment onViewCreated")
         super.onViewCreated(view, savedInstanceState)
 
         profileImage = view.findViewById(R.id.edit_profile_image_button)
@@ -51,5 +53,19 @@ class ProfileFragment : Fragment() {
                 changePasswordLayout.visibility = View.GONE
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "===Profile Fragment onDestroy")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "===Profile Fragment onPause")
+    }
+
+    companion object{
+        const val TAG = "ShopIt-ProfileFragment"
     }
 }

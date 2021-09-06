@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         if(!isRunOnce) {
             val picasso = Picasso.Builder(applicationContext)
-                .loggingEnabled(true)
                 .indicatorsEnabled(true)
                 .build()
 
@@ -54,6 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

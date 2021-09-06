@@ -69,6 +69,7 @@ class SignupActivity : AppCompatActivity() {
                                 displayName = firstNameEditText.text.toString()
                                 //photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
                             }
+
                             user.updateProfile(profileUpdates).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.d(TAG, "User profile updated.")
