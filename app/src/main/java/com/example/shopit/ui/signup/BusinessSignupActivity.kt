@@ -138,37 +138,37 @@ class BusinessSignupActivity : AppCompatActivity(){
         )
 
         val monday = hashMapOf(
-            "Monday" to checkbox_monday,
+            "Open?" to checkbox_monday,
             "Open Time" to open_time_monday,
             "Close Time" to close_time_monday
         )
         val tuesday = hashMapOf(
-            "Tuesday" to checkbox_tuesday,
+            "Open?" to checkbox_tuesday,
             "Open Time" to open_time_tuesday,
             "Close Time" to close_time_tuesday
         )
         val wednesday = hashMapOf(
-            "Wednesday" to checkbox_wednesday,
+            "Open?" to checkbox_wednesday,
             "Open Time" to open_time_wednesday,
             "Close Time" to close_time_wednesday
         )
         val thursday = hashMapOf(
-            "Thursday" to checkbox_thursday,
+            "Open?" to checkbox_thursday,
             "Open Time" to open_time_thursday,
             "Close Time" to close_time_thursday
         )
         val friday = hashMapOf(
-            "Friday" to checkbox_friday,
+            "Open?" to checkbox_friday,
             "Open Time" to open_time_friday,
             "Close Time" to close_time_friday
         )
         val saturday = hashMapOf(
-            "Saturday" to checkbox_saturday,
+            "Open?" to checkbox_saturday,
             "Open Time" to open_time_saturday,
             "Close Time" to close_time_saturday
         )
         val sunday = hashMapOf(
-            "Sunday" to checkbox_sunday,
+            "Open?" to checkbox_sunday,
             "Open Time" to open_time_sunday,
             "Close Time" to close_time_sunday
         )
