@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var emailNameEditText: EditText
     private lateinit var passwordFirstEditText: EditText
     private lateinit var passwordSecondEditText: EditText
+    private lateinit var businessUserCheckbox: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,7 @@ class SignupActivity : AppCompatActivity() {
         emailNameEditText = findViewById(R.id.signup_email_input)
         passwordFirstEditText = findViewById(R.id.signup_password_first_input)
         passwordSecondEditText = findViewById(R.id.signup_password_second_input)
+        businessUserCheckbox = findViewById(R.id.Activity_signup_business_checkbox)
 
         signupButton.setOnClickListener {
             didClickSignup()
@@ -80,9 +83,8 @@ class SignupActivity : AppCompatActivity() {
                                         "first_name" to firstname,
                                         "last_name" to lastname,
                                         "email" to email,
-                                        "password" to password
-
-                                        //TODO: ID - Store ID and User ID
+                                        "password" to password,
+                                        "business_user" to "false"
                                     )
 
 
@@ -90,9 +92,17 @@ class SignupActivity : AppCompatActivity() {
                                         .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
                                         .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                                 }
+
+                                //TODO: if statement for business user check box
+                                //redirect to business signup activity
                             }
 
                             Toast.makeText(baseContext, "Successfully Signed Up!", Toast.LENGTH_SHORT).show()
+
+                            if (businessUserCheckbox.isChecked){
+                                startActivity(Intent(this, BusinessSignupActivity::class.java))
+                                finish()
+                            }
 
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
@@ -165,7 +175,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     companion object{
-        private const val TAG = "ShopIt-SignupActivity"
+        const val TAG = "ShopIt-SignupActivity"
     }
 
 
