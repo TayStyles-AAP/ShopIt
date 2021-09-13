@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="214dp">
+
+        <com.github.captain_miao.optroundcardview.OptRoundCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:optRoundCardCornerRadius="20dp"
+            app:optRoundCardElevation="20dp"
+            app:optRoundCardLeftTopCorner="false"
+            app:optRoundCardMaxElevation="100dp"
+            app:optRoundCardRightTopCorner="false">
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.github.captain_miao.optroundcardview.OptRoundCardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/product_create_button"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="-70dp"
+            android:layout_marginEnd="15dp"
+            android:text="+"
+            android:textSize="20sp"
+            app:cornerRadius="50dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
