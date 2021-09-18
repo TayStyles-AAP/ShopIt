@@ -84,4 +84,9 @@
         android:name="com.example.shopit.ui.maps.MapFragment"
         android:label="Store Location"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/navigation_business"
+        android:name="com.example.shopit.ui.business.BusinessFragment"
+        android:label="Business"
+        tools:layout="@layout/fragment_business" />
 </navigation>

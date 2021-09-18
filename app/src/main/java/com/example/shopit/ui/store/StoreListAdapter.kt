@@ -4,15 +4,17 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopit.R
+import com.example.shopit.data.preferences.Preferences
 import com.example.shopit.data.store.storeProduct.StoreProductDataClass
 
 class StoreListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
     var data = mutableListOf<StoreProductDataClass>()
     var ctx: Context? = null
 
-    var didClickProductAtPosition: ((Int) -> Int)? = null
+    var addItemToCart: ((Int) -> Unit)? = null
 
     set(value) {
         field = value
@@ -21,7 +23,7 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreListItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        var view = layoutInflater.inflate(R.layout.cart_list_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.cart_list_item, parent, false)
         ctx = parent.context
         return StoreListItemViewHolder(view)
     }
@@ -29,9 +31,9 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
     override fun onBindViewHolder(holder: StoreListItemViewHolder, position: Int) {
         holder.product = this.data[position]
 
-        holder.itemView.setOnClickListener {
-            Log.d(TAG, "Clicked Store[$position]")
-            this.didClickProductAtPosition?.let { f -> f(position) }
+        holder.itemView.findViewById<Button>(R.id.cart_add_button).setOnClickListener {
+            Log.d(TAG, "Clicked Item[$position]")
+            this.addItemToCart?.let { f -> f(position) }
         }
     }
 

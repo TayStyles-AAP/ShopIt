@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -16,6 +17,9 @@ import com.example.shopit.MainActivity
 import com.example.shopit.R
 import com.example.shopit.data.store.storeProduct.StoreProductDataClass
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.shopit.data.cart.CartProductDataClass
+import com.example.shopit.data.preferences.Preferences
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -29,6 +33,8 @@ class StoreFragment : Fragment(){
 
     val db = Firebase.firestore
     lateinit var mapPin: ImageView
+
+    var listOfProducts = mutableListOf<StoreProductDataClass>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_store, container, false)
@@ -68,7 +74,39 @@ class StoreFragment : Fragment(){
             Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_mapFragment)
         }
 
-        setProductList{
+        storeListAdapter.addItemToCart = {
+            Log.d(TAG, "User Clicked Item ($it)")
+
+            var cartItem = CartProductDataClass(
+                "www.google.com",
+                listOfProducts[it].productName,
+                listOfProducts[it].productPrice,
+                1,
+                listOfProducts[it].cartProductBarcode
+            )
+
+            val addItemSuccess = Preferences.Singleton.addItemToList(Preferences.Singleton.KEY_SHOPPING_CART, cartItem, requireContext())
+            if (addItemSuccess){
+                Log.d(TAG, "Add Item Successful")
+                Snackbar.make(requireView(), "Product added to cart!", Snackbar.LENGTH_LONG).setAction("View Cart") {
+                    Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_cartFragment)
+                }.show()
+            }else{
+                Log.d(TAG, "Add Item Failed")
+                Snackbar.make(requireView(), "Failed to add to cart", Snackbar.LENGTH_LONG).setAction("Retry") {
+                    val addItemSuccess = Preferences.Singleton.addItemToList(Preferences.Singleton.KEY_SHOPPING_CART, cartItem, requireContext())
+                    if (addItemSuccess){
+                        Snackbar.make(requireView(), "Product added to cart!", Snackbar.LENGTH_LONG).setAction("View Cart") {
+                            Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_cartFragment)
+                        }.show()
+                    }else{
+                        Toast.makeText(requireContext(), "Final Failure", Toast.LENGTH_SHORT).show()
+                    }
+                }.show()
+            }
+        }
+
+        setProductList {
             if (it != null) {
                 Log.d(TAG, "Loading shop list was successful")
                 storeListAdapter.data = it
@@ -81,7 +119,6 @@ class StoreFragment : Fragment(){
     }
 
     private fun setProductList(completion: (isSuccess: MutableList<StoreProductDataClass>?) -> Unit){
-        var listOfProducts = mutableListOf<StoreProductDataClass>()
 
         for (i in 1..32){
             listOfProducts.add(

@@ -12,7 +12,14 @@
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.309375" />
         <entry key="app/src/main/res/layout/business_user_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/business_user_store_hours.xml" value="0.321875" />
+<<<<<<< Updated upstream
+=======
+        <entry key="app/src/main/res/layout/cart_list_item.xml" value="0.3383152173913043" />
+        <entry key="app/src/main/res/layout/code_scanner.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.37552083333333336" />
+>>>>>>> Stashed changes
         <entry key="app/src/main/res/layout/create_account.xml" value="0.3375" />
+        <entry key="app/src/main/res/layout/fragment_business.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.3234375" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3917572463768116" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3917572463768116" />
