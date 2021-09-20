@@ -104,8 +104,10 @@ class Preferences {
                 val cartItemList = mutableListOf<CartProductDataClass>()
 
                 cartItemList.add(data)
+                Log.d(TAG, cartItemList[0].cartProductName)
                 return try {
-                    val cartListGson = gson.toJson(cartList)
+                    val textList: List<CartProductDataClass> = ArrayList(cartItemList)
+                    val cartListGson = gson.toJson(textList)
                     preferences.edit().putString(header, cartListGson).apply()
 
                     val cartContents = getListContents(header, context)
