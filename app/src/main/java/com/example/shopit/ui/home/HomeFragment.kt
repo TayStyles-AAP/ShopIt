@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
                 "tuesday" to "9-5",
                 "wednesday" to "9-5",
             ),
-            "image_url" to "www.testurl.com",
+            "image_url" to "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mon_Ami_Boulangerie_%288119944759%29.jpg/1599px-Mon_Ami_Boulangerie_%288119944759%29.jpg",
             "products" to arrayListOf("test", "test", "test"),
             "sid" to 1
         )
@@ -98,7 +98,7 @@ class HomeFragment : Fragment() {
         for (i in 1..3){
             listOfShops.add(
                 ShopDataClass(
-                    "https://www.dimensionshopfitters.co.nz/assets/Uploads/portfolio/_resampled/SetWidth1140-1-Shop-Front.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mon_Ami_Boulangerie_%288119944759%29.jpg/1599px-Mon_Ami_Boulangerie_%288119944759%29.jpg",
                     "Shop $i",
                     "091110001",
                     null,

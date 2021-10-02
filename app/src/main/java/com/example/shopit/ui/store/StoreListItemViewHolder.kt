@@ -14,10 +14,10 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 class StoreListItemViewHolder(storeItemView: View) : RecyclerView.ViewHolder(storeItemView) {
 
-    private val productImage: ShapeableImageView = itemView.findViewById(R.id.cart_item_image)
-    private val productName: TextView = itemView.findViewById(R.id.cart_item_name)
-    private val productPrice: TextView = itemView.findViewById(R.id.cart_item_price)
-    private val productAddButton: Button = itemView.findViewById(R.id.cart_add_button)
+    private val productImage: ShapeableImageView = itemView.findViewById(R.id.shop_product_item_image)
+    private val productName: TextView = itemView.findViewById(R.id.shop_product_item_name)
+    private val productPrice: TextView = itemView.findViewById(R.id.shop_product_item_price)
+    private val productAddButton: Button = itemView.findViewById(R.id.shop_product_add_button)
     //private val productQuantity: TextView = itemView.findViewById(R.id.cart_item_quantity)
 
     private val picasso: Picasso = Picasso.get()
@@ -27,7 +27,7 @@ class StoreListItemViewHolder(storeItemView: View) : RecyclerView.ViewHolder(sto
         field = value
 
         this.productName.text = this.product!!.productName
-        this.productPrice.text = this.product!!.productPrice
+        this.productPrice.text = String.format("%.2f",this.product!!.productPrice)
         productAddButton.visibility = View.VISIBLE
 
 

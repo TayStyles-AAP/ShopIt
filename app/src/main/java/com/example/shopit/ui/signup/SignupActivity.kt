@@ -49,7 +49,6 @@ class SignupActivity : AppCompatActivity() {
 
         signupButton.setOnClickListener {
             didClickSignup()
-
         }
     }
 
@@ -64,37 +63,32 @@ class SignupActivity : AppCompatActivity() {
                         val firstname: String = firstNameEditText.getText().toString()
                         val lastname: String = lastNameEditText.getText().toString()
                         val email: String = emailNameEditText.getText().toString()
-                        val password: String = passwordFirstEditText.getText().toString()
-
 
                         if (user != null) {
                             val profileUpdates = userProfileChangeRequest {
-                                displayName = firstNameEditText.text.toString()
+                                this.displayName = firstNameEditText.text.toString()
                                 //photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
                             }
+
+                            val uid = user.uid
 
                             user.updateProfile(profileUpdates).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.d(TAG, "User profile updated.")
 
+
                                     //firestore write to database
                                     val user_dets = hashMapOf(
                                         "email" to email,
-                                        "first_name" to firstname,
-                                        "last_name" to lastname,
-                                        "email" to email,
-                                        "password" to password,
-                                        "business_user" to "false"
+                                        "business_user" to "false",
+                                        "uid" to uid
                                     )
 
 
-                                    db.collection("Users").document(email).set(user_dets)
-                                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-                                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+                                    db.collection("Users").document(uid).set(user_dets)
+                                        .addOnSuccessListener { Log.d(TAG, "User (${uid}, Added to DB!") }
+                                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document (${uid})", e) }
                                 }
-
-                                //TODO: if statement for business user check box
-                                //redirect to business signup activity
                             }
 
                             Toast.makeText(baseContext, "Successfully Signed Up!", Toast.LENGTH_SHORT).show()
@@ -102,10 +96,10 @@ class SignupActivity : AppCompatActivity() {
                             if (businessUserCheckbox.isChecked){
                                 startActivity(Intent(this, BusinessSignupActivity::class.java))
                                 finish()
+                            }else{
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
                             }
-
-                            startActivity(Intent(this, MainActivity::class.java))
-                            finish()
                         }
                     } else {
                         // If sign in fails, display a message to the user.

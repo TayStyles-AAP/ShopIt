@@ -2,6 +2,7 @@ package com.example.productit.ui.home
 
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -18,18 +19,17 @@ class CartListItemViewHolder(cartItemView: View) : RecyclerView.ViewHolder(cartI
     private val productPrice: TextView = itemView.findViewById(R.id.cart_item_price)
     //private val productQuantity: TextView = itemView.findViewById(R.id.cart_item_quantity)
 
-    val picasso: Picasso = Picasso.get()
+    private val picasso: Picasso = Picasso.get()
 
     var product: CartProductDataClass? = null
         set(value) {
             field = value
 
             this.productName.text = this.product!!.cartProductName
-            this.productPrice.text = this.product!!.cartProductPrice
+            this.productPrice.text = String.format("%.2f",this.product!!.cartProductPrice)
             //this.productQuantity.text = this.product!!.cartProductQuantity // to be defined
 
-
-            Log.d("SiteListItemViewHolder", "product image URL is:(${this.product!!.cartProductImage})")
+            Log.d(TAG, "product image URL is:(${this.product!!.cartProductImage})")
 
             if (this.product!!.cartProductImage.isBlank()) {
                 productImage.setImageResource(R.drawable.ic_product)
@@ -46,4 +46,7 @@ class CartListItemViewHolder(cartItemView: View) : RecyclerView.ViewHolder(cartI
                     .into(productImage)
             }
         }
+    companion object {
+        private const val TAG = "ShopItIt-CartListItemViewHolder"
+    }
 }

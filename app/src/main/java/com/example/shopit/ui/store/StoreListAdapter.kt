@@ -23,7 +23,7 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreListItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.cart_list_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.shop_product_list_item, parent, false)
         ctx = parent.context
         return StoreListItemViewHolder(view)
     }
@@ -31,7 +31,7 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
     override fun onBindViewHolder(holder: StoreListItemViewHolder, position: Int) {
         holder.product = this.data[position]
 
-        holder.itemView.findViewById<Button>(R.id.cart_add_button).setOnClickListener {
+        holder.itemView.findViewById<Button>(R.id.shop_product_add_button).setOnClickListener {
             Log.d(TAG, "Clicked Item[$position]")
             this.addItemToCart?.let { f -> f(position) }
         }

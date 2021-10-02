@@ -1,8 +1,7 @@
-package com.example.shopit.ui.store
+package com.example.shopit.ui.store.product
 
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView

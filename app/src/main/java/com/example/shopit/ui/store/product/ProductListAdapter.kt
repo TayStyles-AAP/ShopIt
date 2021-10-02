@@ -1,4 +1,4 @@
-package com.example.shopit.ui.store
+package com.example.shopit.ui.store.product
 
 import android.content.Context
 import android.util.Log
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopit.R
 import com.example.shopit.data.store.storeProduct.StoreProductDataClass
+import com.example.shopit.ui.store.StoreListItemViewHolder
 
 class ProductListAdapter : RecyclerView.Adapter<StoreListItemViewHolder>() {
     var data = mutableListOf<StoreProductDataClass>()

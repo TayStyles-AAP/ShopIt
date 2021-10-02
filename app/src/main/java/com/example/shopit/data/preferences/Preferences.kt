@@ -17,21 +17,21 @@ class Preferences {
     //    val DESCRIPTIVE_SAMPLE_NAME = "concise_key_string"
 
         fun addString(header: String, data: String, context: Context): Boolean {
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             preferences.edit().putString(header, data).apply()
 
             return (getString(header, context) == data)
         }
 
         fun addBoolean(header: String, data: Boolean, context: Context): Boolean {
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             preferences.edit().putBoolean(header, data).apply()
 
             return (getBoolean(header, context) == data)
         }
 
         fun getBoolean(header: String, context: Context): Boolean {
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
 
             return preferences.getBoolean(header, false) // get the data that matches header
         }
@@ -39,7 +39,7 @@ class Preferences {
         //gets data from SharedPrefs
         fun getString(header: String, context: Context): String? {
 
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             try {
                 val data = preferences.getString(header, null) // get the data that matches header
                 if (data != null && data.isNotBlank()) {
@@ -53,7 +53,7 @@ class Preferences {
 
         private fun checkHeaderExists(header: String, context: Context): Boolean {
 
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
 
             return try {
                 preferences.getString(header, null) != null
@@ -66,7 +66,7 @@ class Preferences {
 
         fun addItemToList(header: String, data: CartProductDataClass, context: Context): Boolean {
             Log.d(TAG, "Add Item To List")
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             var cartList: MutableList<CartProductDataClass> = mutableListOf()
             val gson = Gson()
 
@@ -124,7 +124,7 @@ class Preferences {
 
         fun removeItemFromList(header: String, idx: Int , context: Context): Boolean {
 
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             var cartList: MutableList<CartProductDataClass> = mutableListOf()
             val gson = Gson()
 
@@ -156,7 +156,7 @@ class Preferences {
         }
 
         fun getListContents(header: String, context: Context): MutableList<CartProductDataClass>? {
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             val gson = Gson()
             var jsonText: String?
             val gsonList: MutableList<CartProductDataClass>
@@ -178,7 +178,7 @@ class Preferences {
 
         fun deleteData(header: String, context: Context): Boolean {
 
-            val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            val preferences = context.getSharedPreferences(header, Context.MODE_PRIVATE)
             preferences.edit().remove(header).apply()
 
             return !checkHeaderExists(header, context)

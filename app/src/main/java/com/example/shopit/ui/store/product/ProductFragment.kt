@@ -1,18 +1,12 @@
-package com.example.shopit.ui.store
+package com.example.shopit.ui.store.product
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shopit.MainActivity
 import com.example.shopit.R
 import com.example.shopit.data.store.storeProduct.StoreProductDataClass
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,7 +57,7 @@ class ProductFragment : Fragment(){
                 StoreProductDataClass(
                     "",
                     "test product name",
-                    "",
+                    i.toFloat(),
                     "Test Description Test Description Test Description Test Description Test Description ",
                     "01001010111101",
                     true
