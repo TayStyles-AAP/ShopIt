@@ -29,7 +29,6 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:padding="3dp"
-                    app:contentPadding="10dp"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:srcCompat="@drawable/ic_building"
                     app:strokeColor="@android:color/darker_gray"

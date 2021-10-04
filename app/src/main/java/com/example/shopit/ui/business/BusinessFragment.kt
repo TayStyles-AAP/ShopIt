@@ -27,15 +27,14 @@ import java.time.DayOfWeek
 class BusinessFragment : Fragment() {
 
     lateinit var addProductButton : Button
-    lateinit var shopData : ShopDataClass
-    lateinit var userBusinessID : String
-  //  lateinit var businessImage : ShapeableImageView
+    lateinit var businessImage : ShapeableImageView
     lateinit var businessName : TextView
     lateinit var businessNumber : TextView
     lateinit var businessAddressLineOne : TextView
     lateinit var businessAddressLineTwo : TextView
     lateinit var businessAddressSuburb : TextView
     lateinit var businessAddressCity : TextView
+    private val picasso: Picasso = Picasso.get()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,7 +45,7 @@ class BusinessFragment : Fragment() {
         Log.d(TAG, "=== Business Fragment onViewCreated ===")
         super.onViewCreated(view, savedInstanceState)
 
-        //  businessImage = view.findViewById(R.id.business_image)
+        businessImage = view.findViewById(R.id.business_image)
         businessName = view.findViewById(R.id.business_name)
         businessNumber = view.findViewById(R.id.business_number)
         businessAddressLineOne = view.findViewById(R.id.business_address_line_one)
@@ -86,6 +85,22 @@ class BusinessFragment : Fragment() {
                                 businessAddressLineTwo.setText(it.shopAddress.addressLineTwo)
                                 businessAddressSuburb.setText(it.shopAddress.addressSuburb)
                                 businessAddressCity.setText(it.shopAddress.addressCity)
+
+                                if (it.shopImage!!.isBlank()) {
+
+                                    businessImage.setImageResource(R.drawable.ic_product)
+                                    businessImage.setColorFilter(
+                                        ContextCompat.getColor(
+                                            businessImage.context,
+                                            android.R.color.darker_gray
+                                        )
+                                    )
+                                    businessImage.strokeWidth = 0.0F
+                                } else {
+                                    picasso.load(it.shopImage)
+                                        .transform(CropCircleTransformation())
+                                        .into(businessImage)
+                                }
                             }
                         }
 
