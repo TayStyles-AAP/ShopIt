@@ -1,9 +1,12 @@
 package com.example.shopit.ui.barcodescanner
 
 import android.Manifest
+import android.R.attr
+import android.accessibilityservice.GestureDescription
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.opengl.EGL14
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -14,19 +17,28 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.shopit.R
+
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
+
 import kotlinx.android.synthetic.main.code_scanner.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import com.google.gson.Gson
+import android.R.attr.data
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URL
+
 
 class BarcodeScanner : Fragment() {
 
@@ -94,7 +106,10 @@ class BarcodeScanner : Fragment() {
         codeScanner.decodeCallback = DecodeCallback {
             activity?.runOnUiThread {
                 // What happens when successful scan
-                barcodeOutput.text = it.text
+                fetchProductDetails(it.text)
+
+
+
             }
         }
 
@@ -121,6 +136,24 @@ class BarcodeScanner : Fragment() {
     companion object{
         private const val CAMERA_REQUEST_CODE = 101
         private const val TAG = "ShopIt-Barcode Scanner"
+    }
+
+    private fun fetchProductDetails(barcode:String){
+
+        try {
+          val url = "https://api.barcodelookup.com/v3/products?barcode=" + barcode + "&formatted=y&key=1ct066a2tju9kgdtjeraj8aw5gk4u1"
+          val okHttp = OkHttpClient.Builder()
+          val builder = Retrofit.Builder().baseUrl(url)
+              .addConverterFactory(GsonConverterFactory.create())
+              .client(okHttp.build())
+
+          val retrofit = builder.build()
+
+
+
+        } catch (ex : Exception) {
+            Log.d("Exception:","fuck")
+        }
     }
 }
 

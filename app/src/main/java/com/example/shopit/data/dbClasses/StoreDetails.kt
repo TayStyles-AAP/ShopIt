@@ -9,6 +9,6 @@ data class StoreDetails(
     var shopPhoneNumber: String?,
     var shopEmail: String?,
     var shopAddress: ShopAddressDataClass,
-    var shopHours: Map<String, String>,
+    var shopHours: ShopHoursDataClass,
     var shopId: String
 )

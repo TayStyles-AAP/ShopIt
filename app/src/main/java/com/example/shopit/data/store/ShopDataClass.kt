@@ -7,4 +7,5 @@ data class ShopDataClass(
     var shopEmail: String?,
     var shopAddress: ShopAddressDataClass,
     var shopHours: MutableList<ShopHoursDataClass>,
+    var shopSid: String
     )
