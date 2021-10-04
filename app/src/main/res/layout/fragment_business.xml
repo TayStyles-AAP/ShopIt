@@ -78,7 +78,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/business_address_line_two"
+                        android:id="@+id/business_address_line_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address Line 1"
@@ -86,10 +86,18 @@
                         android:textSize="12dp" />
 
                     <TextView
-                        android:id="@+id/business_address_line_one"
+                        android:id="@+id/business_address_line_Two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address Line 2"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/business_address_suburb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address Post Code"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -98,14 +106,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address City"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-                    <TextView
-                        android:id="@+id/business_address_post_code"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Address Post Code"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
