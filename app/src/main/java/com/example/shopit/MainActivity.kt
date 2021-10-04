@@ -11,6 +11,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.shopit.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +33,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+
+        val currentUser = Firebase.auth.currentUser
+        if (currentUser != null) {
+            FirebaseFirestore.getInstance().collection("Users")
+                .document(currentUser.uid).get()
+                .addOnCompleteListener { task ->
+                    val document = task.result
+                    val isBusinessUser = document!!["business_user"] as Boolean
+
+                    navView.menu.findItem(R.id.navigation_business).isVisible = isBusinessUser
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "Failed to get user business data")
+                    navView.menu.findItem(R.id.navigation_business).isVisible = false
+                }
+        }
+
+
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         Log.d(TAG, navController.toString())
