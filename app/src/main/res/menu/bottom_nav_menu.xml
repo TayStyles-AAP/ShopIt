@@ -4,6 +4,7 @@
     <item
         android:id="@+id/navigation_business"
         android:icon="@drawable/ic_store"
+        android:visible="false"
         android:title="Business" />
     <item
         android:id="@+id/navigation_dashboard"
