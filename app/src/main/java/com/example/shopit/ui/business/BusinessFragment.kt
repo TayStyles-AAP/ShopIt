@@ -54,7 +54,7 @@ class BusinessFragment : Fragment() {
         businessAddressSuburb = view.findViewById(R.id.business_address_suburb)
         businessAddressCity = view.findViewById(R.id.business_address_city)
 
-        getFavouriteStores()
+        getBusinessStore()
 
         addProductButton = view.findViewById(R.id.business_add_product_button)
         addProductButton.setOnClickListener {
@@ -64,7 +64,7 @@ class BusinessFragment : Fragment() {
     }
 
     @Synchronized
-    private fun getFavouriteStores(){
+    private fun getBusinessStore(){
         Log.d(TAG, "isStoreFavourite: called.")
         val currentUser = Firebase.auth.currentUser
 
@@ -162,7 +162,8 @@ class BusinessFragment : Fragment() {
                             mutableListOf(
                                 ShopHoursDataClass(
                                     DayOfWeek.MONDAY, "","")
-                            )
+                            ),
+                        shopSid
                         )
                         completion(details)
                     }
