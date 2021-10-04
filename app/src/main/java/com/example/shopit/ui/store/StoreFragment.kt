@@ -85,7 +85,7 @@ class StoreFragment : Fragment(){
                                 Toast.makeText(requireContext(), "Remove store from favourites failure", Toast.LENGTH_SHORT).show()
                             }
                     }
-                }else if (it == false){
+                } else if (it == false){
                     Log.d(TAG, "addStoreFavourites: it = false")
                     //add store to favourites
                     if (currentUser != null) {
@@ -106,6 +106,16 @@ class StoreFragment : Fragment(){
             }
         }
 
+        isStoreFavourite {
+            if (it == true){
+                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.holo_orange_light, null))
+            }else if (it == false){
+                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.darker_gray, null))
+            }else{
+                Log.d(TAG, "addStoreFavourites: it = null")
+            }
+
+        }
         (activity as MainActivity).didClickCartButton = {
             if (it) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_cartFragment)
@@ -153,7 +163,6 @@ class StoreFragment : Fragment(){
 
     private fun isStoreFavourite(completion: (isSuccess: Boolean?) -> Unit){
         Log.d(TAG, "isStoreFavourite: called.")
-        val db = FirebaseFirestore.getInstance()
         val currentUser = getFirebaseUser()
 
         if (currentUser != null){

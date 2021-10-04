@@ -1,5 +1,6 @@
 package com.example.shopit
 
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,6 +12,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.shopit.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {

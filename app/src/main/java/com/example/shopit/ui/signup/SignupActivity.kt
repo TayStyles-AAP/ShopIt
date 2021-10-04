@@ -80,7 +80,7 @@ class SignupActivity : AppCompatActivity() {
                                     //firestore write to database
                                     val user_dets = hashMapOf(
                                         "email" to email,
-                                        "business_user" to "false",
+                                        "business_user" to false,
                                         "uid" to uid
                                     )
 
