@@ -29,8 +29,7 @@ class StoreListItemViewHolder(storeItemView: View) : RecyclerView.ViewHolder(sto
         this.productName.text = this.product!!.productName
         this.productPrice.text = String.format("%.2f",this.product!!.productPrice)
         productAddButton.visibility = View.VISIBLE
-
-
+        
         //this.productQuantity.text = this.product!!.storeProductQuantity // to be defined
 
         Log.d(TAG, "product image URL is:(${this.product!!.productImage})")
