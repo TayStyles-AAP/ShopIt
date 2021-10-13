@@ -74,7 +74,7 @@ class CartFragment : Fragment(){
     }
 
     private fun updateCartPrice(cartData: MutableList<CartProductDataClass>): Boolean{
-        var currentCartPrice = 0.00f
+        var currentCartPrice = 0.00
 
         for (item in cartData){
             currentCartPrice += item.cartProductPrice

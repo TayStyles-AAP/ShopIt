@@ -92,6 +92,9 @@
         <action
             android:id="@+id/action_navigation_business_to_addProductFragment"
             app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_navigation_business_to_editBusinessFragment"
+            app:destination="@id/editBusinessFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProductFragment"
@@ -100,5 +103,16 @@
         <action
             android:id="@+id/action_addProductFragment_to_barcodeScanner"
             app:destination="@id/barcodeScanner" />
+        <action
+            android:id="@+id/action_addProductFragment_to_navigation_business"
+            app:destination="@id/navigation_business" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBusinessFragment"
+        android:name="com.example.shopit.ui.editbusinessinformation.EditBusinessFragment"
+        android:label="EditBusinessFragment" >
+        <action
+            android:id="@+id/action_editBusinessFragment_to_navigation_business"
+            app:destination="@id/navigation_business" />
     </fragment>
 </navigation>

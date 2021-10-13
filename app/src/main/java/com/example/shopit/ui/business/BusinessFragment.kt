@@ -10,10 +10,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.shopit.R
 import com.example.shopit.data.store.ShopAddressDataClass
 import com.example.shopit.data.store.ShopDataClass
 import com.example.shopit.data.store.ShopHoursDataClass
+import com.example.shopit.data.store.storeProduct.StoreProductDataClass
+import com.example.shopit.ui.home.HomeFragment
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,6 +31,7 @@ import java.time.DayOfWeek
 class BusinessFragment : Fragment() {
 
     lateinit var addProductButton : Button
+    lateinit var editBusinessButton : Button
     lateinit var businessImage : ShapeableImageView
     lateinit var businessName : TextView
     lateinit var businessNumber : TextView
@@ -35,15 +40,30 @@ class BusinessFragment : Fragment() {
     lateinit var businessAddressSuburb : TextView
     lateinit var businessAddressCity : TextView
     private val picasso: Picasso = Picasso.get()
+    var businessListRecyclerView : RecyclerView? = null
+    var businessListAdapter : BusinessListAdapter = BusinessListAdapter()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_business, container, false)
+
+        val rootView = inflater.inflate(R.layout.fragment_business,container,false)
+        val manager = LinearLayoutManager(requireContext())
+
+        businessListRecyclerView = rootView?.findViewById(R.id.business_recycler_view)
+        businessListRecyclerView!!.setHasFixedSize(true)
+        businessListAdapter.data = mutableListOf()
+        businessListRecyclerView!!.layoutManager = manager
+        businessListRecyclerView!!.adapter = businessListAdapter
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "=== Business Fragment onViewCreated ===")
         super.onViewCreated(view, savedInstanceState)
+
+        businessListRecyclerView!!.scheduleLayoutAnimation()
+
 
         businessImage = view.findViewById(R.id.business_image)
         businessName = view.findViewById(R.id.business_name)
@@ -58,6 +78,11 @@ class BusinessFragment : Fragment() {
         addProductButton = view.findViewById(R.id.business_add_product_button)
         addProductButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_business_to_addProductFragment)
+        }
+
+        editBusinessButton = view.findViewById(R.id.business_edit_business_button)
+        editBusinessButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_business_to_editBusinessFragment)
         }
 
     }
@@ -75,6 +100,8 @@ class BusinessFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     val document = task.result
                     val businessSid = (document!!["business_sid"] as String)
+
+                    getBusinessProducts(businessSid)
 
                     if (businessSid != null){
                         getStoreData(businessSid){
@@ -110,6 +137,64 @@ class BusinessFragment : Fragment() {
                     Log.d(TAG, "Failed to get user favourite stores list.")
                 }
         }
+    }
+
+    private fun getBusinessProducts(sid: String){
+
+        FirebaseFirestore.getInstance().collection("Store")
+            .document(sid).get()
+            .addOnCompleteListener { task ->
+                val document = task.result
+                val productList = (document!!["products"] as List<*>).toList()
+
+                if (productList.isNotEmpty()){
+                    for (item in productList){
+                        getProductData(item.toString()){
+                            if (it != null){
+                                businessListAdapter.data.add(0,it)
+                                businessListAdapter.notifyItemInserted(0)
+                        }
+                        }
+                    }
+                }
+            }
+    }
+
+    private fun getProductData(sid : String, completion : (isSuccess : StoreProductDataClass?) -> Unit){
+        FirebaseFirestore.getInstance().collection("Product")
+            .document(sid).get()
+            .addOnCompleteListener { task ->
+                val document = task.result
+                if (document != null){
+                    val name = (document["name"] as String)
+                    val barcode = (document["barcode"] as String)
+                    val price = (document["price"] as Double)
+                    val productImage = (document["image_url"] as String)
+                    val description = (document["description"] as String)
+                    val inStock = true
+
+                    Log.d(TAG, "Name: $name")
+                    Log.d(TAG, "Barcode: $barcode")
+                    Log.d(TAG, "Price: $price")
+                    Log.d(TAG, "Product Image: $productImage")
+                    Log.d(TAG, "Description: $description")
+                    Log.d(TAG, "In Stock: $inStock")
+
+                    val details = StoreProductDataClass(
+                        productImage,
+                        name,
+                        price,
+                        description,
+                        barcode,
+                        inStock
+                    )
+                    completion(details)
+                }
+            }
+            .addOnFailureListener {
+                Log.d(TAG,"Failed to get the Product List")
+                completion(null)
+            }
     }
 
 
@@ -191,7 +276,6 @@ class BusinessFragment : Fragment() {
             completion(null)
         }
     }
-
 
     companion object{
         const val TAG = "ShopIt-BusinessFragment"

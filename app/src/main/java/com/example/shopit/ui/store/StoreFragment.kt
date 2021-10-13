@@ -226,7 +226,7 @@ class StoreFragment : Fragment(){
                 StoreProductDataClass(
                     "",
                     "test product $counter",
-                    counter.toFloat(),
+                    counter.toDouble(),
                     "Test Description Test Description Test Description Test Description Test Description ",
                     "01001010111101",
                     true
