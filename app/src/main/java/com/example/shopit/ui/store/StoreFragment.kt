@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopit.MainActivity
@@ -24,27 +23,19 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.DocumentSnapshot
-
-
-
-
-
 
 class StoreFragment : Fragment(){
 
-    lateinit var storeListRecyclerView: RecyclerView
-    var storeListAdapter: StoreListAdapter = StoreListAdapter()
-    lateinit var mapButton : ImageView
+    private lateinit var storeListRecyclerView: RecyclerView
+    private lateinit var mapButton : ImageView
+    private lateinit var addStoreFavourites: ImageView
 
-    lateinit var addStoreFavoutites: ImageView
-    lateinit var mapPin: ImageView
+    private var storeListAdapter: StoreListAdapter = StoreListAdapter()
+    private var listOfProducts = mutableListOf<StoreProductDataClass>()
 
-    var listOfProducts = mutableListOf<StoreProductDataClass>()
+    private val sid = "1234" //Temp placeholder, we need to start generating these from serverside.
 
-    val sid = "1234"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_store, container, false)
@@ -57,6 +48,7 @@ class StoreFragment : Fragment(){
         storeListAdapter.data = mutableListOf()
         storeListRecyclerView.adapter = storeListAdapter
 
+
         (activity as MainActivity).cartButton?.findItem(R.id.action_bar_cart_item)?.isVisible = true
 
         return rootView
@@ -66,9 +58,9 @@ class StoreFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val db = FirebaseFirestore.getInstance()
 
-        addStoreFavoutites = view.findViewById(R.id.store_favourites)
+        addStoreFavourites = view.findViewById(R.id.store_favourites)
 
-        addStoreFavoutites.setOnClickListener {
+        addStoreFavourites.setOnClickListener {
             val currentUser = getFirebaseUser()
             isStoreFavourite {
                 if (it == true){
@@ -79,7 +71,7 @@ class StoreFragment : Fragment(){
                             .update("favourite_stores", FieldValue.arrayRemove(sid))
                             .addOnSuccessListener {
                                 Toast.makeText(requireContext(), "Remove store from favourites success", Toast.LENGTH_SHORT).show()
-                                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.darker_gray, null))
+                                addStoreFavourites.setColorFilter(resources.getColor(android.R.color.darker_gray, null))
                             }
                             .addOnFailureListener {
                                 Toast.makeText(requireContext(), "Remove store from favourites failure", Toast.LENGTH_SHORT).show()
@@ -94,7 +86,7 @@ class StoreFragment : Fragment(){
                             .update("favourite_stores", FieldValue.arrayUnion(sid))
                             .addOnSuccessListener {
                                 Toast.makeText(requireContext(), "Added Store To Favourites", Toast.LENGTH_SHORT).show()
-                                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.holo_orange_light, null))
+                                addStoreFavourites.setColorFilter(resources.getColor(android.R.color.holo_orange_light, null))
                             }
                             .addOnFailureListener {
                                 Toast.makeText(requireContext(), "Failed to add store to favorites", Toast.LENGTH_SHORT).show()
@@ -108,9 +100,9 @@ class StoreFragment : Fragment(){
 
         isStoreFavourite {
             if (it == true){
-                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.holo_orange_light, null))
+                addStoreFavourites.setColorFilter(resources.getColor(android.R.color.holo_orange_light, null))
             }else if (it == false){
-                addStoreFavoutites.setColorFilter(resources.getColor(android.R.color.darker_gray, null))
+                addStoreFavourites.setColorFilter(resources.getColor(android.R.color.darker_gray, null))
             }else{
                 Log.d(TAG, "addStoreFavourites: it = null")
             }
@@ -122,14 +114,6 @@ class StoreFragment : Fragment(){
             }
         }
 
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            // We use a String here, but any type that can be put in a Bundle is supported
-            val result = bundle.getString("bundleKey")
-            // Do something with the result
-            
-        }
-
-
         mapButton = view.findViewById(R.id.store_maps_pin)
         mapButton.setOnClickListener{
             var result = "10 Manu Place Pinehill Auckland"
@@ -137,18 +121,21 @@ class StoreFragment : Fragment(){
             Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_mapFragment)
         }
 
+        //Called when recycler adaper is pressed on item
+        //Returns: Int to be handled.
         storeListAdapter.addItemToCart = {
             Log.d(TAG, "User Clicked Item ($it)")
             val cartItem = CartProductDataClass(
                 listOfProducts[it].productImage,
                 listOfProducts[it].productName,
                 listOfProducts[it].productPrice,
-                1,
+                1, //Add one to cart, multiple is handled by cart
                 listOfProducts[it].cartProductBarcode
             )
             addProductToCart(cartItem)
         }
 
+        //Async function call. onComplete() will return it, a MutableList<StoreProductDataClass>.
         setProductList {
             if (it != null) {
                 Log.d(TAG, "Loading shop list was successful")
@@ -161,13 +148,18 @@ class StoreFragment : Fragment(){
         }
     }
 
+    /**
+     * Gets firestore users Uid and querys for weather the stores Sid is contained within the users table of favourite stores.
+     * Asic network function with completion method for call back after data received.
+     * @param completion - Callback.
+     * @return isSuccess - Boolean
+     */
     private fun isStoreFavourite(completion: (isSuccess: Boolean?) -> Unit){
         Log.d(TAG, "isStoreFavourite: called.")
         val currentUser = getFirebaseUser()
 
         if (currentUser != null){
             Log.d(TAG, "isStoreFavourite: User is not null")
-
 
             FirebaseFirestore.getInstance().collection("Users")
                 .document(currentUser.uid).get()
@@ -190,7 +182,7 @@ class StoreFragment : Fragment(){
         }
     }
 
-
+    //Gets currently logged in firebase user and returns it as a FirebaseUser object.
     private fun getFirebaseUser(): FirebaseUser?{
         val currentUser = Firebase.auth.currentUser
         if (currentUser != null){
@@ -200,6 +192,7 @@ class StoreFragment : Fragment(){
         }
     }
 
+    //Adds product to offline app preferences for cart use.
     private fun addProductToCart(cartItem: CartProductDataClass) {
         val addItemSuccess = Preferences.Singleton.addItemToList(
             Preferences.Singleton.KEY_SHOPPING_CART,
@@ -219,8 +212,8 @@ class StoreFragment : Fragment(){
         }
     }
 
+    //function for adding dummy data to stores products. Returns on completion method.
     private fun setProductList(completion: (isSuccess: MutableList<StoreProductDataClass>?) -> Unit){
-
         for (counter in 1..32){
             listOfProducts.add(
                 StoreProductDataClass(

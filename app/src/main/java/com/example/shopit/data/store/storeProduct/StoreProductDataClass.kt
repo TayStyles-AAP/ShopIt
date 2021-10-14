@@ -8,3 +8,4 @@ data class StoreProductDataClass (
     var cartProductBarcode: String,     //Barcode numbers
     var storeProductIsInStock: Boolean  //Set if the item is in stock or not
     )
+
