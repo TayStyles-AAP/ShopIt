@@ -17,6 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import java.lang.NullPointerException
+import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +43,12 @@ class MainActivity : AppCompatActivity() {
                 .document(currentUser.uid).get()
                 .addOnCompleteListener { task ->
                     val document = task.result
-                    val isBusinessUser = document!!["business_user"] as Boolean
+
+                    val isBusinessUser = try{
+                        document!!["business_user"] as Boolean
+                    }catch (ex: NullPointerException){
+                        false
+                    }
 
                     navView.menu.findItem(R.id.navigation_business).isVisible = isBusinessUser
                 }
@@ -69,7 +76,11 @@ class MainActivity : AppCompatActivity() {
                 .indicatorsEnabled(true)
                 .build()
 
-            Picasso.setSingletonInstance(picasso)
+            try {
+                Picasso.setSingletonInstance(picasso)
+            }catch (ex: RuntimeException){
+                Log.d(TAG, "Whoops, idk how to fix this so try catch will do the trick ;)")
+            }
 
             isRunOnce = true
         }

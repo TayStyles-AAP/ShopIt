@@ -8,6 +8,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.arrayMapOf
 import com.example.shopit.MainActivity
 import com.example.shopit.R
 import com.google.firebase.auth.FirebaseAuth
@@ -60,13 +61,13 @@ class SignupActivity : AppCompatActivity() {
 
                         val user = auth.currentUser
                         val db = FirebaseFirestore.getInstance()
-                        val firstname: String = firstNameEditText.getText().toString()
-                        val lastname: String = lastNameEditText.getText().toString()
                         val email: String = emailNameEditText.getText().toString()
 
                         if (user != null) {
+                            Log.d(TAG, "User is trying to sign up")
                             val profileUpdates = userProfileChangeRequest {
                                 this.displayName = firstNameEditText.text.toString()
+                                Log.d(TAG, "Editing firebase user")
                                 //photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
                             }
 
@@ -74,31 +75,37 @@ class SignupActivity : AppCompatActivity() {
 
                             user.updateProfile(profileUpdates).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    Log.d(TAG, "User profile updated.")
+                                    Log.d(TAG, "User profile updated successfully")
 
 
                                     //firestore write to database
                                     val user_dets = hashMapOf(
                                         "email" to email,
-                                        "business_user" to false,
-                                        "uid" to uid
+                                        "business_user" to true,
+                                        "business_sid" to "1p0KsXy3tGSbTZ8syxSa",
+                                        "uid" to uid,
+                                        "favourite_stores" to listOf("1p0KsXy3tGSbTZ8syxSa")
                                     )
 
+                                    Log.d(TAG, "Calling DB to add new user, ${user_dets}")
 
-                                    db.collection("Users").document(uid).set(user_dets)
-                                        .addOnSuccessListener { Log.d(TAG, "User (${uid}, Added to DB!") }
-                                        .addOnFailureListener { e -> Log.w(TAG, "Error writing document (${uid})", e) }
+                                    FirebaseFirestore.getInstance().collection("Users").document(uid).set(user_dets)
+                                        .addOnSuccessListener {
+                                            Log.d(TAG, "User (${uid}, Added to DB!")
+                                            Toast.makeText(baseContext, "Successfully Signed Up!", Toast.LENGTH_SHORT).show()
+
+                                            if (businessUserCheckbox.isChecked){
+                                                Log.d(TAG, "User (${uid}, Added to DB!")
+                                                startActivity(Intent(this, BusinessSignupActivity::class.java))
+                                                finish()
+                                            }else{
+                                                Log.d(TAG, "Successful process. Launching Main Activity")
+                                                startActivity(Intent(this, MainActivity::class.java))
+                                                finish()
+                                            }
+                                        }
+                                        .addOnFailureListener { e -> Log.d(TAG, "Error writing document (${uid})", e) }
                                 }
-                            }
-
-                            Toast.makeText(baseContext, "Successfully Signed Up!", Toast.LENGTH_SHORT).show()
-
-                            if (businessUserCheckbox.isChecked){
-                                startActivity(Intent(this, BusinessSignupActivity::class.java))
-                                finish()
-                            }else{
-                                startActivity(Intent(this, MainActivity::class.java))
-                                finish()
                             }
                         }
                     } else {

@@ -77,7 +77,12 @@ class HomeFragment : Fragment() {
                 .document(currentUser.uid).get()
                 .addOnCompleteListener { task ->
                     val document = task.result
-                    val favouriteStores = (document!!["favourite_stores"] as List<*>).toList()
+
+                    var favouriteStores = try {
+                        (document!!["favourite_stores"] as List<*>).toList()
+                    }catch (ex: java.lang.NullPointerException){
+                        listOf()
+                    }
 
                     if (favouriteStores.isNotEmpty()){
 

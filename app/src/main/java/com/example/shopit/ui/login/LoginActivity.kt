@@ -116,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null){
-            Log.d(TAG, "User is already logged in (${currentUser.displayName})")
+            Log.d(TAG, "User is already logged in (${currentUser.uid})")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
