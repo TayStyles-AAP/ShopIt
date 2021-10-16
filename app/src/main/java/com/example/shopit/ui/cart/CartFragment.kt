@@ -61,7 +61,7 @@ class CartFragment : Fragment(){
                     cartListAdapter.notifyItemRemoved(it)
                     if(updateCartPrice(cartData).not()){
                         Navigation.findNavController(requireView()).popBackStack(R.id.storeFragment, false)
-                        Snackbar.make(requireView(), "Cart Empty!", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), "Cart Empty!", Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -69,7 +69,7 @@ class CartFragment : Fragment(){
 
         } else {
             Navigation.findNavController(requireView()).popBackStack(R.id.storeFragment, false)
-            Snackbar.make(requireView(), "No items in cart", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "No items in cart", Snackbar.LENGTH_SHORT).show()
         }
     }
 
