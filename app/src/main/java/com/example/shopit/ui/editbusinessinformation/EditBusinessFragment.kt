@@ -16,6 +16,7 @@ import com.example.shopit.R
 import com.example.shopit.data.store.ShopHoursDataClass
 import com.example.shopit.ui.business.BusinessFragment
 import com.example.shopit.ui.profile.ProfileFragment.Companion.TAG
+import com.google.android.gms.common.util.ArrayUtils.contains
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -132,8 +133,7 @@ class EditBusinessFragment : Fragment(){
                                     val bName = (documentTwo["business_name"] as String)
                                     val bPhone = (documentTwo["phone_number"] as String)
                                     val address = (documentTwo["address"] as Map <*, *>)
-                                    val hours = (documentTwo["hours"] as Map<String, List<*>>)
-
+                                    val hours = (documentTwo["hours"] as Map<String, Map<*, *>>)
 
                                     var mondayIsOpen = false
                                     var mOpen = ""
@@ -141,19 +141,27 @@ class EditBusinessFragment : Fragment(){
 
 
                                     for (item in hours){
-                                        when (item.key){
-                                            "monday" -> {
-                                                for (entry in item.value){
-                                                    when (item.key) {
-                                                        "is_open" -> {
-                                                            mondayIsOpen =
-                                                                item.value.toString().toBoolean()
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                        if (hours.containsKey("monday")){
+
+
+
+
+                                            //"monday" -> {
+//                                                for (entry in item.value){
+//                                                    if (containsKey("open")) {
+//                                                     //   "open" -> {
+//                                                          //  var test = item.value
+//                                                           // Log.d(TAG, "item vale $test")
+//                                                            mOpen = item.value.toString()
+//                                                            Log.d(TAG, "Monday: $mOpen")
+//                                                        //}
+//                                                    }
+//                                                }
+//                                            }
                                         }
                                     }
+
+
 
                                     var addressLineOne = ""
                                     var addressLineTwo = ""
@@ -219,7 +227,6 @@ class EditBusinessFragment : Fragment(){
                         "country" to businessAddressCountry.getText().toString(),
                         "suburb" to businessAddressSuburb.getText().toString()
                     )
-
 
                     val ref = FirebaseFirestore.getInstance().collection("Store").document(businessSid)
 

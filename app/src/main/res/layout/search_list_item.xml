@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/business_product_item_image"
+                android:id="@+id/search_shop_item_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_marginEnd="5dp"
@@ -42,13 +42,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/business_product_item_name"
+                    android:id="@+id/search_shop_item_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="fill_vertical"
                     android:lines="1"
-                    android:text="Product Name"
+                    android:text="Shop Name"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -58,35 +58,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="fill_vertical"
-                        android:lines="1"
-                        android:text="$"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/business_product_item_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="fill_vertical"
-                        android:lines="1"
-                        android:paddingEnd="10dp"
-                        android:text="0.00"
-                        android:textSize="14sp" />
                 </LinearLayout>
-
-
             </LinearLayout>
-            <Button
-                android:id="@+id/business_product_remove_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Remove"
-                android:visibility="visible"
-                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
         <View style="@style/Divider.Horizontal" />

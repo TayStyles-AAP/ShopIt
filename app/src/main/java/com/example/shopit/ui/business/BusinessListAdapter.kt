@@ -22,11 +22,10 @@ class BusinessListAdapter : RecyclerView.Adapter<BusinessListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessListItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        var view = layoutInflater.inflate(R.layout.shop_list_item, parent, false)
+        var view = layoutInflater.inflate(R.layout.business_product_list_item, parent, false)
         ctx = parent.context
         return BusinessListItemViewHolder(view)
     }
-
 
     override fun getItemCount(): Int {
         return this.data.size
