@@ -48,7 +48,6 @@ class BusinessFragment : Fragment() {
     var businessListRecyclerView: RecyclerView? = null
     var businessListAdapter: BusinessListAdapter = BusinessListAdapter()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_business, container, false)
@@ -222,7 +221,7 @@ class BusinessFragment : Fragment() {
                     val details = StoreProductDataClass(
                         productImage,
                         name,
-                        price,
+                        price.toFloat(),
                         description,
                         barcode,
                         inStock

@@ -23,7 +23,7 @@ class BusinessListItemViewHolder(businessItemView: View) : RecyclerView.ViewHold
             field = value
 
             this.productName.text = this.product!!.productName
-            this.price.text = this.product!!.productPrice.toString()
+            this.price.text = String.format("%.2f",this.product!!.productPrice)
 
 
             Log.d("SiteListItemViewHolder", "Product image URL is:(${this.product!!.productImage})")

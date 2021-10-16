@@ -57,7 +57,7 @@ class ProductFragment : Fragment(){
                 StoreProductDataClass(
                     "",
                     "test product name",
-                    i.toDouble(),
+                    i.toFloat(),
                     "Test Description Test Description Test Description Test Description Test Description ",
                     "01001010111101",
                     true

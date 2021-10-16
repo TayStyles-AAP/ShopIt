@@ -128,7 +128,7 @@ class StoreFragment : Fragment(){
             val cartItem = CartProductDataClass(
                 listOfProducts[it].productImage,
                 listOfProducts[it].productName,
-                listOfProducts[it].productPrice,
+                listOfProducts[it].productPrice.toFloat(),
                 1, //Add one to cart, multiple is handled by cart
                 listOfProducts[it].cartProductBarcode
             )
@@ -219,7 +219,7 @@ class StoreFragment : Fragment(){
                 StoreProductDataClass(
                     "",
                     "test product $counter",
-                    counter.toDouble(),
+                    counter.toFloat(),
                     "Test Description Test Description Test Description Test Description Test Description ",
                     "01001010111101",
                     true
