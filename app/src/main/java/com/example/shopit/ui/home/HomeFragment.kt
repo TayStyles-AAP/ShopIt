@@ -111,64 +111,79 @@ class HomeFragment : Fragment() {
             FirebaseFirestore.getInstance().collection("Store")
                 .document(sid).get()
                 .addOnCompleteListener { task ->
-                    val document = task.result
-                    if (document != null) {
-                        val address = (document["address"] as Map<*, *>)
-                        val name = (document["business_name"] as String)
-                        val imageUrl = (document["image"] as String)
-                        val phoneNumber = (document["phone_number"] as String)
-                        val email = (document["email"] as String)
-                        val hours = (document["hours"] as Map<*, *>)
-                        val shopSid = (document["sid"] as String)
+                    try {
+                        val document = task.result
+                        if (document != null) {
+                            val address = (document["address"] as Map<*, *>)
+                            val name = (document["business_name"] as String)
+                            val imageUrl = (document["image"] as String)
+                            val phoneNumber = (document["phone_number"] as String)
+                            val email = (document["email"] as String)
+                            val hours = (document["hours"] as Map<*, *>)
+                            val shopSid = (document["sid"] as String)
 
-                        var addressLineOne = ""
-                        var addressLineTwo = ""
-                        var city = ""
-                        var country = ""
-                        var suburb = ""
+                            var addressLineOne = ""
+                            var addressLineTwo = ""
+                            var city = ""
+                            var country = ""
+                            var suburb = ""
 
-                        for(item in address){
-                            when(item.key){
-                                "address_line_1" -> {
-                                    addressLineOne = item.value.toString()
-                                }
-                                "address_line_2" -> {
-                                    addressLineTwo = item.value.toString()
-                                }
-                                "city" -> {
-                                    city = item.value.toString()
-                                }
-                                "country" -> {
-                                    country = item.value.toString()
-                                }
-                                "suburb" -> {
-                                    suburb = item.value.toString()
+                            for (item in address) {
+                                when (item.key) {
+                                    "address_line_1" -> {
+                                        addressLineOne = item.value.toString()
+                                    }
+                                    "address_line_2" -> {
+                                        addressLineTwo = item.value.toString()
+                                    }
+                                    "city" -> {
+                                        city = item.value.toString()
+                                    }
+                                    "country" -> {
+                                        country = item.value.toString()
+                                    }
+                                    "suburb" -> {
+                                        suburb = item.value.toString()
+                                    }
                                 }
                             }
+
+                            Log.d(TAG, "RECIEVED STORE DATA")
+                            Log.d(
+                                TAG,
+                                "Address: $addressLineOne, $addressLineTwo, $suburb, $city, $country,"
+                            )
+                            Log.d(TAG, "Name: ${name}")
+                            Log.d(TAG, "Image Url: ${imageUrl}")
+                            Log.d(TAG, "Phone Number: ${phoneNumber}")
+                            Log.d(TAG, "Email: ${email}")
+                            Log.d(TAG, "Hours: ${hours}")
+                            Log.d(TAG, "Sid: ${shopSid}")
+
+
+                            val details = ShopDataClass(
+                                imageUrl,
+                                name,
+                                phoneNumber,
+                                email,
+                                ShopAddressDataClass(
+                                    addressLineOne,
+                                    addressLineTwo,
+                                    suburb,
+                                    city,
+                                    country
+                                ),
+                                mutableListOf(
+                                    ShopHoursDataClass(
+                                        DayOfWeek.MONDAY, "", ""
+                                    )
+                                ),
+                                shopSid
+                            )
+                            completion(details)
                         }
-
-                        Log.d(TAG, "RECIEVED STORE DATA")
-                        Log.d(TAG, "Address: $addressLineOne, $addressLineTwo, $suburb, $city, $country,")
-                        Log.d(TAG, "Name: ${name}")
-                        Log.d(TAG, "Image Url: ${imageUrl}")
-                        Log.d(TAG, "Phone Number: ${phoneNumber}")
-                        Log.d(TAG, "Email: ${email}")
-                        Log.d(TAG, "Hours: ${hours}")
-                        Log.d(TAG, "Sid: ${shopSid}")
-
-
-                        val details = ShopDataClass(
-                            imageUrl,
-                            name,
-                            phoneNumber,
-                            email,
-                            ShopAddressDataClass(addressLineOne, addressLineTwo, suburb, city, country),
-                            mutableListOf(
-                            ShopHoursDataClass(
-                                DayOfWeek.MONDAY, "","")),
-                            shopSid
-                        )
-                        completion(details)
+                    }catch(ex: NullPointerException){
+                        Log.d(TAG, "lol what exception? i didnt see anything")
                     }
                 }
                 .addOnFailureListener {
