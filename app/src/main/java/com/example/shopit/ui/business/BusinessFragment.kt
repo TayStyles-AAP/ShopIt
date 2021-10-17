@@ -37,9 +37,14 @@ class BusinessFragment : Fragment() {
 
     lateinit var addProductButton: Button
     lateinit var editBusinessButton: Button
+
+    lateinit var viewHoursButton: Button
+
     lateinit var businessImage: ShapeableImageView
     lateinit var businessName: TextView
     lateinit var businessNumber: TextView
+    lateinit var businessEmail: TextView
+
     lateinit var businessAddressLineOne: TextView
     lateinit var businessAddressLineTwo: TextView
     lateinit var businessAddressSuburb: TextView
@@ -47,6 +52,8 @@ class BusinessFragment : Fragment() {
     private val picasso: Picasso = Picasso.get()
     var businessListRecyclerView: RecyclerView? = null
     var businessListAdapter: BusinessListAdapter = BusinessListAdapter()
+
+    lateinit var searchView: SearchView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -72,10 +79,24 @@ class BusinessFragment : Fragment() {
         businessImage = view.findViewById(R.id.business_image)
         businessName = view.findViewById(R.id.business_name)
         businessNumber = view.findViewById(R.id.business_number)
+        businessEmail = view.findViewById(R.id.business_email)
+
         businessAddressLineOne = view.findViewById(R.id.business_address_line_one)
         businessAddressLineTwo = view.findViewById(R.id.business_address_line_Two)
         businessAddressSuburb = view.findViewById(R.id.business_address_suburb)
         businessAddressCity = view.findViewById(R.id.business_address_city)
+
+        searchView = view.findViewById(R.id.business_search_search_view)
+
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+        }
+
+        view.findViewById<Button>(R.id.business_view_hours_button).setOnClickListener {
+            //build custom dialog box ui for displaying this as a popup!
+
+
+        }
 
         getBusinessStore()
 
@@ -148,6 +169,7 @@ class BusinessFragment : Fragment() {
                             if (it != null) {
                                 businessName.setText(it.shopName)
                                 businessNumber.setText(it.shopPhoneNumber)
+                                businessEmail.setText(it.shopEmail)
                                 businessAddressLineOne.setText(it.shopAddress.addressLineOne)
                                 businessAddressLineTwo.setText(it.shopAddress.addressLineTwo)
                                 businessAddressSuburb.setText(it.shopAddress.addressSuburb)
@@ -183,7 +205,12 @@ class BusinessFragment : Fragment() {
             .document(sid).get()
             .addOnCompleteListener { task ->
                 val document = task.result
-                val productList = (document!!["products"] as List<*>).toList()
+
+                var productList = try{
+                        (document!!["products"] as List<String>).toList()
+                } catch (ex: NullPointerException){
+                    listOf()
+                }
 
                 if (productList.isNotEmpty()) {
                     for (item in productList) {
@@ -308,7 +335,7 @@ class BusinessFragment : Fragment() {
                             ),
                             mutableListOf(
                                 ShopHoursDataClass(
-                                    DayOfWeek.MONDAY, "", ""
+                                    DayOfWeek.MONDAY, "", "", false
                                 )
                             ),
                             shopSid

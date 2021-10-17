@@ -14,17 +14,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="16dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Create Business Account"
-                android:textAlignment="center"
-                android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/business_user_signup_company_name_input"
@@ -33,6 +25,24 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Company Name"
+                android:inputType="text"
+                android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/business_user_signup_company_number_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:inputType="text"
+                android:minHeight="48dp" />
+            <EditText
+                android:id="@+id/business_user_signup_company_email_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Email"
                 android:inputType="text"
                 android:minHeight="48dp" />
 
@@ -44,16 +54,6 @@
                 android:text="Address"
                 android:textAlignment="center"
                 android:textSize="25sp" />
-
-            <EditText
-                android:id="@+id/business_user_signup_city_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="City"
-                android:inputType="text"
-                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/business_user_signup_lineone_input"
@@ -86,6 +86,16 @@
                 android:minHeight="48dp" />
 
             <EditText
+                android:id="@+id/business_user_signup_city_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="City"
+                android:inputType="text"
+                android:minHeight="48dp" />
+
+            <EditText
                 android:id="@+id/business_user_signup_country_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +114,7 @@
                 android:textSize="25sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -136,7 +146,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -167,7 +177,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -198,7 +208,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -229,7 +239,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -260,7 +270,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -291,7 +301,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -323,7 +333,9 @@
 
             <Button
                 android:id="@+id/business_user_signup_submit_button"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:text="Create Business Account" />
 

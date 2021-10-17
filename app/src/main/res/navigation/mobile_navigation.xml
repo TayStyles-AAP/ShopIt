@@ -31,6 +31,9 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 
     <fragment

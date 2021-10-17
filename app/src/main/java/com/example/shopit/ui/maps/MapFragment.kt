@@ -49,6 +49,7 @@ class MapFragment : Fragment() {
             }
         }
 
+
         try {
             MapsInitializer.initialize(requireActivity().applicationContext)
         } catch (e: Exception) {
@@ -56,14 +57,13 @@ class MapFragment : Fragment() {
         }
     }
 
-     fun geoLocate(address:String){
-
-        shopAddress = address
+     private fun geoLocate(address1 : String){
+        shopAddress = address1
         addressList = geocoder.getFromLocationName(shopAddress, 1)
         val address : Address = addressList[0]
-        val shopLatLng = LatLng(address.latitude,address.longitude)
+        val shopLatLng = LatLng(address.latitude, address.longitude)
 
-        googleMap.addMarker(MarkerOptions().position(shopLatLng).title("Test"))
+        googleMap.addMarker(MarkerOptions().position(shopLatLng).title(address1))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(shopLatLng))
     }
 }

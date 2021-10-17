@@ -180,7 +180,7 @@ class HomeFragment : Fragment() {
                                 ),
                                 mutableListOf(
                                     ShopHoursDataClass(
-                                        DayOfWeek.MONDAY, "", ""
+                                        DayOfWeek.MONDAY, "", "", false
                                     )
                                 ),
                                 shopSid

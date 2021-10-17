@@ -60,7 +60,6 @@ class SignupActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val user = auth.currentUser
-                        val db = FirebaseFirestore.getInstance()
                         val email: String = emailNameEditText.getText().toString()
 
                         if (user != null) {
@@ -81,8 +80,8 @@ class SignupActivity : AppCompatActivity() {
                                     //firestore write to database
                                     val user_dets = hashMapOf(
                                         "email" to email,
-                                        "business_user" to true,
-                                        "business_sid" to "1p0KsXy3tGSbTZ8syxSa",
+                                        "business_user" to false,
+                                        "business_sid" to "",
                                         "uid" to uid,
                                         "favourite_stores" to listOf("1p0KsXy3tGSbTZ8syxSa")
                                     )
@@ -97,7 +96,6 @@ class SignupActivity : AppCompatActivity() {
                                             if (businessUserCheckbox.isChecked){
                                                 Log.d(TAG, "User (${uid}, Added to DB!")
                                                 startActivity(Intent(this, BusinessSignupActivity::class.java))
-                                                finish()
                                             }else{
                                                 Log.d(TAG, "Successful process. Launching Main Activity")
                                                 startActivity(Intent(this, MainActivity::class.java))
@@ -178,6 +176,4 @@ class SignupActivity : AppCompatActivity() {
     companion object{
         const val TAG = "ShopIt-SignupActivity"
     }
-
-
 }

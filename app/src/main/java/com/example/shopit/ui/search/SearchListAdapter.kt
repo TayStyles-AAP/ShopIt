@@ -13,7 +13,10 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListItemViewHolder>() {
     var data = mutableListOf<ShopDataClass>()
     var ctx: Context? = null
 
-    var didClickProductAtShop: ((Int) -> Unit)? = null
+    var clickedShopAtIdx: ((Int) -> Unit)? = null
+    var clickedPhone: ((String) -> Unit)? = null
+    var clickedMap: ((String) -> Unit)? = null
+
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,7 +34,13 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListItemViewHolder>() {
 
         holder.itemView.setOnClickListener {
             Log.d(TAG, "Click shop[$position]")
-            this.didClickProductAtShop?.let{ f -> f(position)}
+            this.clickedShopAtIdx?.let{ f -> f(position)}
+        }
+        holder.phoneButton.setOnClickListener {
+            this.clickedPhone?.let{ f -> f(holder.shop!!.shopPhoneNumber.toString())}
+        }
+        holder.mapButton.setOnClickListener {
+            this.clickedMap?.let{ f -> f("${holder.shop!!.shopAddress.addressLineOne} ${holder.shop!!.shopAddress.addressSuburb} ${holder.shop!!.shopAddress.addressCity}")}
         }
     }
 
@@ -45,6 +54,6 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListItemViewHolder>() {
     }
 
     companion object {
-        private const val TAG = "SearchListAdapter"
+        private const val TAG = "ShopIt-SearchListAdapter"
     }
 }

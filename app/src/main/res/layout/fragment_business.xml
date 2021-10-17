@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f0f0f0"
         android:orientation="vertical">
 
         <LinearLayout
@@ -58,6 +59,14 @@
                         android:text="Store Number"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/business_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
                 </LinearLayout>
 
 
@@ -67,20 +76,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="0.9"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/business_address_line_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address Line 1"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=",  "
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -92,11 +107,26 @@
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.9"
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/business_address_suburb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address Post Code"
+                        android:text="Suburb"
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=",  "
                         android:textColor="@color/black"
                         android:textSize="12dp" />
 
@@ -107,12 +137,16 @@
                         android:text="Address City"
                         android:textColor="@color/black"
                         android:textSize="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="."
+                        android:textColor="@color/black"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
-
-
             </LinearLayout>
-        </LinearLayout>
+            </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,19 +156,32 @@
 
             <Button
                 android:id="@+id/business_add_product_button"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:minHeight="60dp"
+                android:layout_gravity="bottom"
+                android:text="Add Items"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/business_view_hours_button"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="Add Product"
+                android:text="View Hours"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"/>
 
             <Button
                 android:id="@+id/business_edit_business_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="Edit"
+                android:text="Edit Store"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="10dp"/>
 
@@ -145,7 +192,9 @@
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             app:optRoundCardCornerRadius="20dp"
-            app:optRoundCardElevation="20dp"
+            app:optRoundCardElevation="30dp"
+            android:outlineSpotShadowColor="@android:color/black"
+            android:outlineAmbientShadowColor="@color/black"
             app:optRoundCardLeftBottomCorner="false"
             app:optRoundCardMaxElevation="100dp"
             app:optRoundCardRightBottomCorner="false">
@@ -161,6 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
+                    android:longClickable="true"
                     android:layout_marginTop="20dp"
                     android:paddingStart="1dp" />
 
