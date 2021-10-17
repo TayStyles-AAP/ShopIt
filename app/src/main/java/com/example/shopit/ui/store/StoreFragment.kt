@@ -52,7 +52,7 @@ class StoreFragment : Fragment(){
     lateinit var addressSuburb : TextView
     lateinit var addressCountry : TextView
     private val picasso: Picasso = Picasso.get()
-    val sid = "1000"
+    var sid = "1000"
 
     private var storeListAdapter: StoreListAdapter = StoreListAdapter()
     private var listOfProducts = mutableListOf<StoreProductDataClass>()
@@ -81,6 +81,7 @@ class StoreFragment : Fragment(){
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val result = bundle.getString("bundleKey")
             val shopSid = result.toString()
+            sid = shopSid
 
             setStoreData(shopSid)
 
@@ -154,10 +155,9 @@ class StoreFragment : Fragment(){
             }
         }
 
-
         mapButton = view.findViewById(R.id.store_maps_pin)
         mapButton.setOnClickListener{
-            var result = "10 Manu Place Pinehill Auckland"
+            var result = addressLineOne.toString() + ", " + addressLineTwo.toString()
             setFragmentResult("requestKey", bundleOf("bundleKey" to result))
             Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_mapFragment)
         }
