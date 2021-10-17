@@ -168,11 +168,11 @@ class StoreFragment : Fragment(){
         storeListAdapter.addItemToCart = {
             Log.d(TAG, "User Clicked Item ($it)")
             val cartItem = CartProductDataClass(
-                listOfProducts[it].productImage,
-                listOfProducts[it].productName,
-                listOfProducts[it].productPrice.toFloat(),
+                storeListAdapter.data[it].productImage,
+                storeListAdapter.data[it].productName,
+                storeListAdapter.data[it].productPrice.toFloat(),
                 1, //Add one to cart, multiple is handled by cart
-                listOfProducts[it].cartProductBarcode
+                storeListAdapter.data[it].cartProductBarcode
             )
             addProductToCart(cartItem)
         }
@@ -370,7 +370,7 @@ class StoreFragment : Fragment(){
                 }
             }
     }
-    
+
 
     override fun onResume() {
         super.onResume()
