@@ -62,8 +62,9 @@ class MapFragment : Fragment() {
         addressList = geocoder.getFromLocationName(shopAddress, 1)
         val address : Address = addressList[0]
         val shopLatLng = LatLng(address.latitude, address.longitude)
-
+         val zoomLevel = 18f
         googleMap.addMarker(MarkerOptions().position(shopLatLng).title(address1))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(shopLatLng))
+         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(shopLatLng, zoomLevel))
+
     }
 }
