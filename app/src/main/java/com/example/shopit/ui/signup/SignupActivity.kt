@@ -61,6 +61,8 @@ class SignupActivity : AppCompatActivity() {
 
                         val user = auth.currentUser
                         val email: String = emailNameEditText.getText().toString()
+                        val firstName = firstNameEditText.getText().toString()
+                        val lastName = lastNameEditText.getText().toString()
 
                         if (user != null) {
                             Log.d(TAG, "User is trying to sign up")
@@ -82,7 +84,10 @@ class SignupActivity : AppCompatActivity() {
                                         "email" to email,
                                         "business_user" to false,
                                         "business_sid" to "",
+                                        "user_image" to "",
                                         "uid" to uid,
+                                        "first_name" to firstName,
+                                        "last_name" to lastName,
                                         "favourite_stores" to listOf("1p0KsXy3tGSbTZ8syxSa")
                                     )
 

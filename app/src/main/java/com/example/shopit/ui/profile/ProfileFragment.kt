@@ -2,6 +2,7 @@ package com.example.shopit.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,9 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.app
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import kotlinx.coroutines.selects.select
 import java.lang.NullPointerException
+import java.net.URI
 
 class ProfileFragment : Fragment() {
 
@@ -45,6 +48,7 @@ class ProfileFragment : Fragment() {
     lateinit var saveButton : Button
 
     lateinit var logoutButton: FloatingActionButton
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
@@ -65,7 +69,6 @@ class ProfileFragment : Fragment() {
         originalPasswordInput = view.findViewById(R.id.edit_profile_original_password)
         newPasswordInput = view.findViewById(R.id.edit_profile_new_password)
         newPasswordRepeatInput = view.findViewById(R.id.edit_profile_new_password_repeat)
-
         saveButton = view.findViewById(R.id.edit_profile_save_button)
 
         getProfileData()
@@ -79,6 +82,10 @@ class ProfileFragment : Fragment() {
                 }
 
             }
+        }
+
+        editProfileImage.setOnClickListener{
+            selectImage()
         }
 
         view.findViewById<FloatingActionButton>(R.id.logoutButton).setOnClickListener {
@@ -168,6 +175,14 @@ class ProfileFragment : Fragment() {
                 }
         }
     }
+
+    private fun selectImage(){
+
+        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
+            type = "image/*"
+            startActivityForResult(this, 2001)
+        }
+      }
 
     override fun onDestroy() {
         super.onDestroy()

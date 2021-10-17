@@ -13,7 +13,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
     var data = mutableListOf<ShopDataClass>()
     var ctx: Context? = null
 
-    var didClickShopAtPosition: ((Int) -> Unit)? = null
+    var didClickShopAtPosition: ((String) -> Unit)? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,7 +31,7 @@ class HomeListAdapter : RecyclerView.Adapter<HomeListItemViewHolder>() {
 
         holder.itemView.setOnClickListener {
             Log.d(TAG, "Clicked shop[$position]")
-            this.didClickShopAtPosition?.let { f -> f(position) }
+            this.didClickShopAtPosition?.let { f -> f("${holder.shop!!.shopSid}") }
         }
     }
 
