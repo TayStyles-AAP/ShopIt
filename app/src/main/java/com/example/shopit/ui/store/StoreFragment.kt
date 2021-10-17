@@ -84,6 +84,7 @@ class StoreFragment : Fragment(){
             sid = shopSid
 
             setStoreData(shopSid)
+            getStoreProducts(shopSid)
 
             Log.d(TAG, "Shop SID: $shopSid")
         }
@@ -174,18 +175,6 @@ class StoreFragment : Fragment(){
                 listOfProducts[it].cartProductBarcode
             )
             addProductToCart(cartItem)
-        }
-
-        //Async function call. onComplete() will return it, a MutableList<StoreProductDataClass>.
-        setProductList {
-            if (it != null) {
-                Log.d(TAG, "Loading shop list was successful")
-                storeListAdapter.data = it
-                storeListAdapter.update(it)
-                storeListRecyclerView.scheduleLayoutAnimation()
-            }else{
-                Log.d(TAG, "Loading shop list was failure")
-            }
         }
     }
 
@@ -320,26 +309,68 @@ class StoreFragment : Fragment(){
         }
     }
 
-    //function for adding dummy data to stores products. Returns on completion method.
-    private fun setProductList(completion: (isSuccess: MutableList<StoreProductDataClass>?) -> Unit){
-        for (counter in 1..32){
-            listOfProducts.add(
-                StoreProductDataClass(
-                    "",
-                    "test product $counter",
-                    counter.toFloat(),
-                    "Test Description Test Description Test Description Test Description Test Description ",
-                    "01001010111101",
-                    true
-                )
-            )
-        }
-        if(listOfProducts.isNullOrEmpty().not()){
-            completion(listOfProducts)
-        }else{
-            completion(null)
-        }
+    private fun getProductData(sid: String, completion: (isSuccess: StoreProductDataClass?) -> Unit) {
+        FirebaseFirestore.getInstance().collection("Product")
+            .document(sid).get()
+            .addOnCompleteListener { task ->
+                val document = task.result
+                if (document != null) {
+                    val name = (document["name"] as String)
+                    val barcode = (document["barcode"] as String)
+                    val price = (document["price"] as Double)
+                    val productImage = (document["image_url"] as String)
+                    val description = (document["description"] as String)
+                    val inStock = true
+
+                    Log.d(BusinessFragment.TAG, "Name: $name")
+                    Log.d(BusinessFragment.TAG, "Barcode: $barcode")
+                    Log.d(BusinessFragment.TAG, "Price: $price")
+                    Log.d(BusinessFragment.TAG, "Product Image: $productImage")
+                    Log.d(BusinessFragment.TAG, "Description: $description")
+                    Log.d(BusinessFragment.TAG, "In Stock: $inStock")
+
+                    val details = StoreProductDataClass(
+                        productImage,
+                        name,
+                        price.toFloat(),
+                        description,
+                        barcode,
+                        inStock
+                    )
+                    completion(details)
+                }
+            }
+            .addOnFailureListener {
+                Log.d(BusinessFragment.TAG, "Failed to get the Product List")
+                completion(null)
+            }
     }
+
+    private fun getStoreProducts(sid: String) {
+        FirebaseFirestore.getInstance().collection("Store")
+            .document(sid).get()
+            .addOnCompleteListener { task ->
+                val document = task.result
+
+                var productList = try{
+                    (document!!["products"] as List<String>).toList()
+                } catch (ex: NullPointerException){
+                    listOf()
+                }
+
+                if (productList.isNotEmpty()) {
+                    for (item in productList) {
+                        getProductData(item.toString()) {
+                            if (it != null) {
+                                storeListAdapter.data.add(0, it)
+                                storeListAdapter.notifyItemInserted(0)
+                            }
+                        }
+                    }
+                }
+            }
+    }
+    
 
     override fun onResume() {
         super.onResume()
