@@ -63,6 +63,11 @@ class SearchFragment : Fragment() {
             }
         }
 
+        searchListAdapter.clickedShopAtIdx = {
+            setFragmentResult("requestKey", bundleOf("bundleKey" to it))
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_storeFragment)
+        }
+
         searchListAdapter.clickedPhone = {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$it")

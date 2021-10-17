@@ -13,7 +13,7 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListItemViewHolder>() {
     var data = mutableListOf<ShopDataClass>()
     var ctx: Context? = null
 
-    var clickedShopAtIdx: ((Int) -> Unit)? = null
+    var clickedShopAtIdx: ((String) -> Unit)? = null
     var clickedPhone: ((String) -> Unit)? = null
     var clickedMap: ((String) -> Unit)? = null
 
@@ -34,7 +34,7 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListItemViewHolder>() {
 
         holder.itemView.setOnClickListener {
             Log.d(TAG, "Click shop[$position]")
-            this.clickedShopAtIdx?.let{ f -> f(position)}
+            this.clickedShopAtIdx?.let { f -> f("${holder.shop!!.shopSid}") }
         }
         holder.phoneButton.setOnClickListener {
             this.clickedPhone?.let{ f -> f(holder.shop!!.shopPhoneNumber.toString())}
