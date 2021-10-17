@@ -1,5 +1,6 @@
 package com.example.shopit.ui.business
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,6 +54,9 @@ class BusinessFragment : Fragment() {
     var businessListRecyclerView: RecyclerView? = null
     var businessListAdapter: BusinessListAdapter = BusinessListAdapter()
 
+    lateinit var businessHours: Map<*, Map<*, *>>
+    var businessSid = ""
+
     lateinit var searchView: SearchView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -94,8 +98,7 @@ class BusinessFragment : Fragment() {
 
         view.findViewById<Button>(R.id.business_view_hours_button).setOnClickListener {
             //build custom dialog box ui for displaying this as a popup!
-
-
+            displayDialogue()
         }
 
         getBusinessStore()
@@ -129,10 +132,8 @@ class BusinessFragment : Fragment() {
         }
     }
 
-    private fun removeProductFromBusiness(
-        item: Int,
-        cartData: MutableList<CartProductDataClass>
-    ): Boolean {
+
+    private fun removeProductFromBusiness(item: Int, cartData: MutableList<CartProductDataClass>): Boolean {
         val removeItemSuccess = Preferences.Singleton.removeItemFromList(
             Preferences.Singleton.KEY_SHOPPING_CART,
             item,
@@ -148,8 +149,117 @@ class BusinessFragment : Fragment() {
         }
     }
 
+    private fun displayDialogue() {
+        var infoDialog: AlertDialog?
+
+        val view: View = layoutInflater.inflate(R.layout.custom_business_hours_dialogue, null)
+        val dismissButton = view.findViewById<Button>(R.id.business_dialogue_dismiss_button)
+
+        setDialogueUI(view)
+
+
+        infoDialog = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setCancelable(true)
+            .create()
+        infoDialog.show()
+
+        dismissButton.setOnClickListener {
+            //delete user.
+            infoDialog.dismiss()
+        }
+    }
+
+    private fun setDialogueUI(view: View) {
+        val mondayOpen = view.findViewById<TextView>(R.id.business_dialogue_monday_open)
+        val mondayClosed = view.findViewById<TextView>(R.id.business_dialogue_monday_closed)
+
+        val tuesdayOpen = view.findViewById<TextView>(R.id.business_dialogue_tuesday_open)
+        val tuesdayClosed = view.findViewById<TextView>(R.id.business_dialogue_tuesday_closed)
+
+        val wednesdayOpen = view.findViewById<TextView>(R.id.business_dialogue_wednesday_open)
+        val wednesdayClosed = view.findViewById<TextView>(R.id.business_dialogue_wednesday_closed)
+
+        val thursdayOpen = view.findViewById<TextView>(R.id.business_dialogue_thursday_open)
+        val thursdayClosed = view.findViewById<TextView>(R.id.business_dialogue_thursday_closed)
+
+        val fridayOpen = view.findViewById<TextView>(R.id.business_dialogue_friday_open)
+        val fridayClosed = view.findViewById<TextView>(R.id.business_dialogue_friday_closed)
+
+        val saturdayOpen = view.findViewById<TextView>(R.id.business_dialogue_saturday_open)
+        val saturdayClosed = view.findViewById<TextView>(R.id.business_dialogue_saturday_closed)
+
+        val sundayOpen = view.findViewById<TextView>(R.id.business_dialogue_sunday_open)
+        val sundayClosed = view.findViewById<TextView>(R.id.business_dialogue_sunday_closed)
+
+        if (this.businessHours.size > 5) {
+            for (day in businessHours) {
+                when (day.key) {
+                    "monday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> mondayClosed.text = entry.value.toString()
+                                "open" -> mondayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "tuesday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> tuesdayClosed.text = entry.value.toString()
+                                "open" -> tuesdayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "wednesday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> wednesdayClosed.text = entry.value.toString()
+                                "open" -> wednesdayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "thursday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> thursdayClosed.text = entry.value.toString()
+                                "open" -> thursdayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "friday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> fridayClosed.text = entry.value.toString()
+                                "open" -> fridayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "saturday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> saturdayClosed.text = entry.value.toString()
+                                "open" -> saturdayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                    "sunday" -> {
+                        for (entry in day.value) {
+                            when (entry.key) {
+                                "close" -> sundayClosed.text = entry.value.toString()
+                                "open" -> sundayOpen.text = entry.value.toString()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     @Synchronized
-    private fun getBusinessStore() {
+    private fun getBusinessStore(){
+
         Log.d(TAG, "isStoreFavourite: called.")
         val currentUser = Firebase.auth.currentUser
 
@@ -161,6 +271,8 @@ class BusinessFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     val document = task.result
                     val businessSid = (document!!["business_sid"] as String)
+
+                    this.businessSid = businessSid
 
                     getBusinessProducts(businessSid)
 
@@ -279,8 +391,10 @@ class BusinessFragment : Fragment() {
                         val imageUrl = (document["image"] as String)
                         val phoneNumber = (document["phone_number"] as String)
                         val email = (document["email"] as String)
-                        val hours = (document["hours"] as Map<*, *>)
+                        val hours = (document["hours"] as Map<*, Map<*, *>>)
                         val shopSid = (document["sid"] as String)
+
+                        this.businessHours = hours
 
                         var addressLineOne = ""
                         var addressLineTwo = ""
