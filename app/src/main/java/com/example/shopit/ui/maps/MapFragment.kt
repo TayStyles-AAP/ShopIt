@@ -3,12 +3,14 @@ package com.example.shopit.ui.maps
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.example.shopit.R
+import com.example.shopit.ui.profile.ProfileFragment.Companion.TAG
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -34,10 +36,12 @@ class MapFragment : Fragment() {
         mapView.onResume()
         geocoder = Geocoder(requireContext())
 
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
+        setFragmentResultListener("mapRequestKey") { requestKey, bundle ->
             // We use a String here, but any type that can be put in a Bundle is supported
             val result = bundle.getString("bundleKey")
             // Do something with the result
+
+            Log.d(TAG, "Result MapFragement: $result")
 
             mapView.getMapAsync { mMap ->
                 googleMap = mMap

@@ -75,7 +75,7 @@ class SearchFragment : Fragment() {
         }
 
         searchListAdapter.clickedMap = {
-            setFragmentResult("requestKey", bundleOf("bundleKey" to it))
+            setFragmentResult("mapRequestKey", bundleOf("bundleKey" to it))
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_mapFragment)
 
             Log.d(TAG, "this is it, : $it")

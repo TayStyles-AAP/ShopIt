@@ -158,8 +158,9 @@ class StoreFragment : Fragment(){
 
         mapButton = view.findViewById(R.id.store_maps_pin)
         mapButton.setOnClickListener{
-            var result = "10 Manu Place Pinehill Auckland"
-            setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            var location = addressLineOne.getText().toString() + " " + addressCity.getText().toString()
+            Log.d(TAG, "Result Map: $location")
+            setFragmentResult("mapRequestKey", bundleOf("bundleKey" to location))
             Navigation.findNavController(requireView()).navigate(R.id.action_storeFragment_to_mapFragment)
         }
 
