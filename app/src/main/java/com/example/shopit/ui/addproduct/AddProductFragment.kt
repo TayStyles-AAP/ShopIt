@@ -25,6 +25,7 @@ class AddProductFragment : Fragment() {
     lateinit var productDescriptionInput : EditText
     lateinit var productBarcodeInput : EditText
     lateinit var productInstockInput : Switch
+    lateinit var productAgeRestrictedInput : Switch
    // lateinit var productData : StoreProductDataClass
 
 
@@ -43,6 +44,7 @@ class AddProductFragment : Fragment() {
         productDescriptionInput = view.findViewById(R.id.add_product_description_input)
         productBarcodeInput = view.findViewById(R.id.add_product_barcode_input)
         productInstockInput = view.findViewById(R.id.add_product_in_stock_switch)
+        productAgeRestrictedInput = view.findViewById(R.id.add_product_age_restricted_switch)
 
         addProductButton.setOnClickListener {
             getBusiness()
@@ -81,7 +83,8 @@ class AddProductFragment : Fragment() {
                 "image_url" to "",
                 "name" to productNameInput.getText().toString(),
                 "price" to productPriceInput.getText().toString().toFloat(),
-                "in_stock" to productInstockInput.isChecked
+                "in_stock" to productInstockInput.isChecked,
+                "in_stock" to productAgeRestrictedInput.isChecked
             )
 
         FirebaseFirestore.getInstance().collection("Product")

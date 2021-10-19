@@ -50,8 +50,7 @@
                 android:ems="10"
                 android:hint="Product name"
                 android:inputType="text"
-                android:minHeight="48dp"
-                android:layout_marginBottom="10dp"/>
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/add_product_price_input"
@@ -65,13 +64,13 @@
             <EditText
                 android:id="@+id/add_product_description_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="159dp"
                 android:ems="10"
-                android:maxLines="6"
-                android:hint="Description"
-                android:maxHeight="150dp"
                 android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:maxHeight="150dp"
+                android:maxLines="6" />
 
 <!--            <EditText-->
 <!--                android:id="@+id/add_product_description_input"-->
@@ -107,6 +106,13 @@
                 android:text="Is This Product In stock"
                 android:layout_marginTop="10dp"/>
 
+
+            <Switch
+                android:id="@+id/add_product_age_restricted_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="Is This Product Age Restricted" />
 
             <Button
                 android:id="@+id/add_product_submit_button"

@@ -7,5 +7,6 @@ data class StoreProductDataClass (
     var productDescription: String,     //Description
     var cartProductBarcode: String,     //Barcode numbers
     var storeProductIsInStock: Boolean  //Set if the item is in stock or not
+    var storeProductIsAgeRestricted: Boolean  //Set if the item is age restricted or not
     )
 
