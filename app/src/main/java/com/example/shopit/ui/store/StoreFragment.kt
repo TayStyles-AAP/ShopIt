@@ -379,6 +379,7 @@ class StoreFragment : Fragment(){
 
     override fun onStop() {
         super.onStop()
+        (activity as MainActivity).cartButton?.findItem(R.id.action_bar_cart_item)?.isVisible = false
         Log.d(TAG, "onStop called")
     }
 
