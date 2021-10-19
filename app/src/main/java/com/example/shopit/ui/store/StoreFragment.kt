@@ -78,18 +78,6 @@ class StoreFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val db = FirebaseFirestore.getInstance()
 
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val result = bundle.getString("bundleKey")
-            val shopSid = result.toString()
-            sid = shopSid
-
-            setStoreData(shopSid)
-            getStoreProducts(shopSid)
-
-            Log.d(TAG, "Shop SID: $shopSid")
-        }
-
-
         storeImage = view.findViewById(R.id.store_image)
         storeName = view.findViewById(R.id.store_name)
         storeNumber = view.findViewById(R.id.store_number)
@@ -99,8 +87,15 @@ class StoreFragment : Fragment(){
         addressCity = view.findViewById(R.id.store_address_post_city)
         addressCountry = view.findViewById(R.id.store_address_country)
 
-
         addStoreFavourites = view.findViewById(R.id.store_favourites)
+
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            val result = bundle.getString("bundleKey")
+            val shopSid = result.toString()
+            this.sid = shopSid
+
+            Log.d(TAG, "Shop SID: $shopSid")
+        }
 
         addStoreFavourites.setOnClickListener {
             val currentUser = getFirebaseUser()
@@ -372,10 +367,19 @@ class StoreFragment : Fragment(){
             }
     }
 
-
     override fun onResume() {
         super.onResume()
+
+        Log.d(TAG, "onResume called.")
+
+        setStoreData(sid)
+        getStoreProducts(sid)
         (activity as MainActivity).cartButton?.findItem(R.id.action_bar_cart_item)?.isVisible = true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop called")
     }
 
     companion object{
